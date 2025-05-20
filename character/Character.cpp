@@ -82,7 +82,7 @@ void Character::takeDamage(double damage) {
 
 void Character::heal() {
     if(currentHealth > maxHealth * 0.5) {
-        currentHealth += 0.2 * maxHealth;
+        currentHealth = std::min(currentHealth + 0.2 * maxHealth, static_cast<double>(maxHealth));
     } else {
         currentHealth = 0.5 * maxHealth;
     }

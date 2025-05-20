@@ -61,6 +61,14 @@ TEST_CASE("Character heals correctly", "[Character]") {
         std::string output = oss.str();
         REQUIRE(output.find("Health: 50") != std::string::npos);
     }
+
+    SECTION("Overheal results in maxHealth") {
+        char1.heal();
+        std::ostringstream oss;
+        char1.print(oss);
+        std::string output = oss.str();
+        REQUIRE(output.find("Health: 50") != std::string::npos);
+    }
 }
 
 TEST_CASE("Character copy constructor and assignment operator", "[Character]") {
