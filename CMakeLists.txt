@@ -9,6 +9,7 @@ target_sources(
         PRIVATE
             character/Character.cpp
             character/Character.hpp
+            character/CharacterClass.cpp
             character/CharacterClass.hpp
             item/Item.cpp
             item/Item.hpp
@@ -18,7 +19,8 @@ target_sources(
             item/Weapon.hpp
             item/Spell.cpp
             item/Spell.hpp
-            character/CharacterClass.cpp
+            monster/Monster.cpp
+            monster/Monster.hpp
 )
 
 add_executable(DnD_application)
@@ -57,5 +59,7 @@ target_sources(
         PRIVATE
             tests/test_character.cpp
             tests/test_item.cpp
+            tests/test_monster.cpp
+            tests/test_character_monster_interactions.cpp
 )
 catch_discover_tests(test_runner)
