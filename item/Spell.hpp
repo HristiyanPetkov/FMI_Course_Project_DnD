@@ -12,7 +12,8 @@ class Spell : public Item {
 public:
     Spell(const std::string& name, double bonus);
     ~Spell() override = default;
-    Item *clone() override;
+    Item *clone() const override;
+    std::string getType() const override;
 protected:
     double getBonusMultiplier() const override;
 };

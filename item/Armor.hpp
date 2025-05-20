@@ -12,7 +12,8 @@ class Armor : public Item {
 public:
     Armor(const std::string& name, double bonus);
     ~Armor() override = default;
-    Item *clone() override;
+    Item *clone() const override;
+    std::string getType() const override;
 protected:
     double getBonusMultiplier() const override;
 };

@@ -10,6 +10,10 @@ double Spell::getBonusMultiplier() const {
     return 1 + Item::getBonusMultiplier();
 }
 
-Item *Spell::clone() {
+Item *Spell::clone() const {
     return new Spell(*this);
+}
+
+std::string Spell::getType() const {
+    return "Spell";
 }

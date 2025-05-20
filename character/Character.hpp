@@ -9,6 +9,7 @@
 #include <cstddef>
 #include "CharacterClass.hpp"
 #include "../item/Item.hpp"
+#include "../item/Weapon.hpp"
 #include <iostream>
 
 class Character {
@@ -22,6 +23,7 @@ public:
     void heal();
     bool isAlive() const;
     std::ostream& print(std::ostream& os = std::cout);
+    void equipItem(const Item* item);
 private:
     std::string name;
     CharacterClass characterClass;
@@ -34,7 +36,6 @@ private:
     void setInitialStats();
     void setInitialEquipment();
     void copyEquipment(const Character& other);
-
     void swap(Character &character);
 };
 

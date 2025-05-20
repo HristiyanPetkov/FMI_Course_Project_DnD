@@ -13,8 +13,9 @@ public:
     Item(const std::string& name, double bonus);
     double applyBonus(double damage) const;
     virtual ~Item() = default;
-    virtual Item* clone();
+    virtual Item* clone() const;
     std::ostream& print(std::ostream& os);
+    virtual std::string getType() const;
 protected:
     virtual double getBonusMultiplier() const;
 private:

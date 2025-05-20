@@ -5,6 +5,7 @@
 #include "Character.hpp"
 
 #include <utility>
+#include <cstring>
 #include "../item/Armor.hpp"
 #include "../item/Weapon.hpp"
 #include "../item/Spell.hpp"
@@ -123,4 +124,22 @@ std::ostream &Character::print(std::ostream &os) {
 
 bool Character::isAlive() const {
     return currentHealth != 0;
+}
+
+void Character::equipItem(const Item *item) {
+    if (!item) return;
+
+    std::string type = item->getType();
+    if(std::strcmp("Armor", type.c_str()) == 0) {
+        delete armor;
+        armor = item->clone();
+    } else if(std::strcmp("Weapon", type.c_str()) == 0) {
+        delete weapon;
+        weapon = item->clone();
+    } else if(std::strcmp("Spell", type.c_str()) == 0) {
+        delete spell;
+        spell = item->clone();
+    } else {
+        throw std::invalid_argument("Invalid item type");
+    }
 }

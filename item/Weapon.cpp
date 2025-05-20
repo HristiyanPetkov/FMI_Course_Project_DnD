@@ -10,6 +10,10 @@ double Weapon::getBonusMultiplier() const {
     return 1 + Item::getBonusMultiplier();
 }
 
-Item *Weapon::clone() {
+Item *Weapon::clone() const {
     return new Weapon(*this);
+}
+
+std::string Weapon::getType() const {
+    return "Weapon";
 }
