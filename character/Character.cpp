@@ -9,6 +9,7 @@
 #include "../item/Armor.hpp"
 #include "../item/Weapon.hpp"
 #include "../item/Spell.hpp"
+#include "../monster/Monster.hpp"
 
 Character::Character(std::string  name, CharacterClass characterClass)
 : name(std::move(name)), characterClass(characterClass), strength(0), mana(0), maxHealth(0), currentHealth(0),
@@ -122,6 +123,17 @@ std::ostream &Character::print(std::ostream &os) {
     return spell->print(os);
 }
 
+void Character::dealDamage(Monster &monster, Character::AttackType attackType) {
+    switch(attackType) {
+        case AttackType::WEAPON:
+            monster.takeDamage(weapon->applyBonus(static_cast<double>(strength)));
+            break;
+        case AttackType::SPELL:
+            monster.takeDamage(spell->applyBonus(static_cast<double>(mana)));
+            break;
+    }
+}
+
 bool Character::isAlive() const {
     return currentHealth != 0;
 }
@@ -142,4 +154,8 @@ void Character::equipItem(const Item *item) {
     } else {
         throw std::invalid_argument("Invalid item type");
     }
+}
+
+double Character::getCurrentHealth() const {
+    return currentHealth;
 }

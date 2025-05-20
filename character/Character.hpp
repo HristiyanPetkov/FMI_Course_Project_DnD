@@ -12,8 +12,11 @@
 #include "../item/Weapon.hpp"
 #include <iostream>
 
+class Monster;
+
 class Character {
 public:
+    enum class AttackType { WEAPON, SPELL };
     explicit Character(std::string  name, CharacterClass characterClass);
     Character(const Character& other);
     Character& operator=(const Character& other);
@@ -21,9 +24,12 @@ public:
 
     void takeDamage(double damage);
     void heal();
+    void dealDamage(Monster& monster, AttackType attackType);
     bool isAlive() const;
     std::ostream& print(std::ostream& os = std::cout);
     void equipItem(const Item* item);
+
+    double getCurrentHealth() const;
 private:
     std::string name;
     CharacterClass characterClass;
