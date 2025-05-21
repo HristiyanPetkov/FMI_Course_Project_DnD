@@ -37,7 +37,7 @@ bool Monster::isAlive() {
     return currentHealth != 0;
 }
 
-std::ostream &Monster::print(std::ostream &os) {
+std::ostream &Monster::print(std::ostream &os) const {
     os << name << std::endl;
     os << "Strength: " << strength << ", Mana: " << mana << ", Health: " << currentHealth << "\\" << maxHealth << std::endl;
     return os << "Damage reduction mult: " << takenDamageMult << std::endl;

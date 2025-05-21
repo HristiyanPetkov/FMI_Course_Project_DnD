@@ -21,6 +21,8 @@ target_sources(
             item/Spell.hpp
             monster/Monster.cpp
             monster/Monster.hpp
+            map/GameMap.cpp
+            map/GameMap.hpp
 )
 
 add_executable(DnD_application)

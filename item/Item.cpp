@@ -19,7 +19,7 @@ Item *Item::clone() const {
     return new Item(*this);
 }
 
-std::ostream &Item::print(std::ostream &os) {
+std::ostream &Item::print(std::ostream &os) const {
     return os << getType() << ": " << name << " " << bonus << std::endl;
 }
 

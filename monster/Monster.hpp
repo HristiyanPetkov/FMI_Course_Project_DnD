@@ -17,7 +17,7 @@ public:
     void takeDamage(double damage);
     void dealDamage(Character& character) const;
     bool isAlive();
-    std::ostream& print(std::ostream& os = std::cout);
+    std::ostream& print(std::ostream& os = std::cout) const;
     static double getStartingTakenDamageMult(size_t level);
 
     double getCurrentHealth() const;
