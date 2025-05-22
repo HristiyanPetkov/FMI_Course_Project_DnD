@@ -1,4 +1,5 @@
 #include "TreasureTile.hpp"
+#include "EmptyTile.hpp"
 
 TreasureTile::TreasureTile(Item *item)
 : item(item->clone()) {}
@@ -17,6 +18,7 @@ TreasureTile &TreasureTile::operator=(const TreasureTile &other) {
 }
 
 void TreasureTile::apply(Character &character) {
+    item->print();
     character.equipItem(item);
 }
 
@@ -34,4 +36,9 @@ TreasureTile::~TreasureTile() {
 
 Tile *TreasureTile::generateRandomTreasureTile(unsigned int level) {
     return new TreasureTile(Weapon("Sword", 10));
+}
+
+Tile *TreasureTile::changeOnExpended() {
+    delete this;
+    return new EmptyTile();
 }

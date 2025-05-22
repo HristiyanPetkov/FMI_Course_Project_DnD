@@ -9,3 +9,7 @@ char WallTile::getDisplayCharacter() const {
 Tile *WallTile::clone() const {
     return new WallTile();
 }
+
+Tile *WallTile::changeOnExpended() {
+    return this;
+}

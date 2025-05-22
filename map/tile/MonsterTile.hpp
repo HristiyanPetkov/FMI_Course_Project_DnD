@@ -10,6 +10,7 @@ public:
     explicit MonsterTile(const Monster& monster);
     void apply(Character &character) override;
     char getDisplayCharacter() const override;
+    Tile *changeOnExpended() override;
     Tile *clone() const override;
     ~MonsterTile() override = default;
 private:
