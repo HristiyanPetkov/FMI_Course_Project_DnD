@@ -114,7 +114,7 @@ void Character::swap(Character &other) {
     swap(spell, other.spell);
 }
 
-std::ostream &Character::print(std::ostream &os) {
+std::ostream &Character::print(std::ostream &os) const {
     os << name << "(" << characterClass << ")" << std::endl;
     os << "Strength: " << strength << ", Mana: " << mana << ", Health: " << currentHealth << "\\" << maxHealth << std::endl;
     os << "Equipment: " << std::endl;
@@ -123,7 +123,7 @@ std::ostream &Character::print(std::ostream &os) {
     return spell->print(os);
 }
 
-void Character::dealDamage(Monster &monster, Character::AttackType attackType) {
+void Character::dealDamage(Monster &monster, Character::AttackType attackType) const {
     switch(attackType) {
         case AttackType::WEAPON:
             monster.takeDamage(weapon->applyBonus(static_cast<double>(strength)));
@@ -158,4 +158,20 @@ void Character::equipItem(const Item *item) {
 
 double Character::getCurrentHealth() const {
     return currentHealth;
+}
+
+Character::AttackType Character::chooseAttack() {
+    while(true) {
+        std::cout << "Attack type: 1.Weapon, 2.Spell" << std::endl;
+        int choice;
+        std::cin >> choice;
+        switch(choice) {
+            case 1:
+                return Character::AttackType::WEAPON;
+            case 2:
+                return Character::AttackType::SPELL;
+            default:
+                std::cout << "Invalid attack type" << std::endl;
+        }
+    }
 }

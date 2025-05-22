@@ -24,12 +24,13 @@ public:
 
     void takeDamage(double damage);
     void heal();
-    void dealDamage(Monster& monster, AttackType attackType);
+    void dealDamage(Monster& monster, AttackType attackType) const;
     bool isAlive() const;
-    std::ostream& print(std::ostream& os = std::cout);
+    std::ostream& print(std::ostream& os = std::cout) const;
     void equipItem(const Item* item);
-
     double getCurrentHealth() const;
+
+    static Character::AttackType chooseAttack();
 private:
     std::string name;
     CharacterClass characterClass;
