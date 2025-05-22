@@ -37,6 +37,8 @@ target_sources(
             map/tile/EmptyTile.hpp
             map/tile/WallTile.cpp
             map/tile/WallTile.hpp
+            map/GameMapFactory.cpp
+            map/GameMapFactory.hpp
 )
 
 add_executable(DnD_application)
