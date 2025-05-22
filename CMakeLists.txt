@@ -25,6 +25,18 @@ target_sources(
             battle/BattleSystem.hpp
             map/GameMap.cpp
             map/GameMap.hpp
+            map/tile/Tile.cpp
+            map/tile/Tile.hpp
+            map/tile/CharacterTile.cpp
+            map/tile/CharacterTile.hpp
+            map/tile/MonsterTile.cpp
+            map/tile/MonsterTile.hpp
+            map/tile/TreasureTile.cpp
+            map/tile/TreasureTile.hpp
+            map/tile/EmptyTile.cpp
+            map/tile/EmptyTile.hpp
+            map/tile/WallTile.cpp
+            map/tile/WallTile.hpp
 )
 
 add_executable(DnD_application)
