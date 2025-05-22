@@ -9,6 +9,8 @@ target_sources(
         PRIVATE
             character/Character.cpp
             character/Character.hpp
+            character/CharacterFactory.cpp
+            character/CharacterFactory.hpp
             character/CharacterClass.cpp
             character/CharacterClass.hpp
             item/Item.cpp
@@ -39,6 +41,8 @@ target_sources(
             map/tile/WallTile.hpp
             map/GameMapFactory.cpp
             map/GameMapFactory.hpp
+            game/Game.cpp
+            game/Game.hpp
 )
 
 add_executable(DnD_application)

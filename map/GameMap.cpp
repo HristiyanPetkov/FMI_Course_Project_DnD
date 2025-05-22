@@ -8,6 +8,30 @@
 #include "tile/MonsterTile.hpp"
 #include "tile/TreasureTile.hpp"
 
+std::istream& operator>>(std::istream& is, Direction& direction) {
+    char input;
+    is >> input;
+
+    switch(_tolower(input)) {
+        case 'w':
+            direction = Direction::UP;
+            break;
+        case 'a':
+            direction = Direction::LEFT;
+            break;
+        case 's':
+            direction = Direction::DOWN;
+            break;
+        case 'd':
+            direction = Direction::RIGHT;
+            break;
+        default:
+            throw std::invalid_argument("Invalid Direction");
+    }
+
+    return is;
+}
+
 GameMap::GameMap(unsigned int level)
 : width(10), height(10), numberOfMonsters(2), numberOfTreasures(2), map(), characterX(1), characterY(1) {
     calculateLevelParameters(level);
@@ -148,4 +172,70 @@ void GameMap::render() {
         std::cout << std::endl;
     }
     std::cout << "Character coords: {" << characterX << ", " << characterY << "}" << std::endl;
+}
+
+void GameMap::move(Character& character, Direction direction) {
+    if(canMove(direction)) {
+        movePlayer(character, direction);
+    }
+}
+
+bool GameMap::canMove(Direction direction) {
+    switch(direction) {
+        case Direction::UP:
+            if(map[characterY - 1][characterX]->getDisplayCharacter() != '#') {
+                return true;
+            }
+            break;
+        case Direction::RIGHT:
+            if(map[characterY][characterX + 1]->getDisplayCharacter() != '#') {
+                return true;
+            }
+            break;
+        case Direction::DOWN:
+            if(map[characterY + 1][characterX]->getDisplayCharacter() != '#') {
+                return true;
+            }
+            break;
+        case Direction::LEFT:
+            if(map[characterY][characterX - 1]->getDisplayCharacter() != '#') {
+                return true;
+            }
+            break;
+    }
+
+    return false;
+}
+
+void GameMap::movePlayer(Character& character, Direction direction) {
+    switch(direction) {
+        case Direction::UP:
+            map[characterY - 1][characterX]->apply(character);
+            map[characterY - 1][characterX] = map[characterY - 1][characterX]->changeOnExpended();
+            std::swap(map[characterY - 1][characterX], map[characterY][characterX]);
+            --characterY;
+            break;
+        case Direction::RIGHT:
+            map[characterY][characterX + 1]->apply(character);
+            map[characterY][characterX + 1] = map[characterY][characterX + 1]->changeOnExpended();
+            std::swap(map[characterY][characterX + 1], map[characterY][characterX]);
+            ++characterX;
+            break;
+        case Direction::DOWN:
+            map[characterY + 1][characterX]->apply(character);
+            map[characterY + 1][characterX] = map[characterY + 1][characterX]->changeOnExpended();
+            std::swap(map[characterY + 1][characterX], map[characterY][characterX]);
+            ++characterY;
+            break;
+        case Direction::LEFT:
+            map[characterY][characterX - 1]->apply(character);
+            map[characterY][characterX - 1] = map[characterY][characterX - 1]->changeOnExpended();
+            std::swap(map[characterY][characterX - 1], map[characterY][characterX]);
+            --characterX;
+            break;
+    }
+}
+
+bool GameMap::onNextLevelField() const {
+    return characterY == height - 2 && characterX == width - 2;
 }

@@ -33,7 +33,7 @@ double Monster::getStartingTakenDamageMult(unsigned int level) {
     return std::max(1.0, 100 - result) / 100;
 }
 
-bool Monster::isAlive() {
+bool Monster::isAlive() const {
     return currentHealth != 0;
 }
 

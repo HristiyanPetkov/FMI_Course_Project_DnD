@@ -8,6 +8,7 @@ enum class CharacterClass {
     Human, Mage, Warrior
 };
 
-std::ostream& operator<<(std::ostream& os, CharacterClass characterClass);
+std::ostream& operator<<(std::ostream& os, const CharacterClass& characterClass);
+std::istream& operator>>(std::istream& is, CharacterClass& characterClass);
 
-#endif //FMI_COURCE_PROJECT_DND_CHARACTERCLASS_HPP
+#endif

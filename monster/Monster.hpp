@@ -16,7 +16,7 @@ public:
     Monster(const std::string& name, unsigned level);
     void takeDamage(double damage);
     void dealDamage(Character& character) const;
-    bool isAlive();
+    bool isAlive() const;
     std::ostream& print(std::ostream& os = std::cout) const;
     double getCurrentHealth() const;
 

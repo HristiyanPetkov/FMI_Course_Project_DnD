@@ -12,6 +12,7 @@
 #include "tile/Tile.hpp"
 
 enum class Direction {UP, RIGHT, DOWN, LEFT};
+std::istream& operator>>(std::istream& is, Direction& direction);
 
 class GameMap {
 public:
@@ -22,7 +23,10 @@ public:
     ~GameMap();
 
     void render();
-//    void movePlayer(Direction dir);
+    void move(Character& character, Direction direction);
+
+    bool onNextLevelField() const;
+
 private:
     size_t width, height, numberOfMonsters, numberOfTreasures;
     std::vector<std::vector<Tile*>> map;
@@ -34,6 +38,9 @@ private:
     void setStartingCharacterTile();
     void placeRandomElements(unsigned level);
     std::vector<std::pair<size_t, size_t>> getValidPositions();
+
+    bool canMove(Direction direction);
+    void movePlayer(Character& character, Direction direction);
 };
 
 

@@ -1,7 +1,3 @@
-//
-// Created by vorte on 5/20/2025.
-//
-
 #ifndef FMI_COURCE_PROJECT_DND_CHARACTER_HPP
 #define FMI_COURCE_PROJECT_DND_CHARACTER_HPP
 
@@ -17,6 +13,8 @@ class Monster;
 class Character {
 public:
     enum class AttackType { WEAPON, SPELL };
+
+    Character();
     explicit Character(std::string  name, CharacterClass characterClass);
     Character(const Character& other);
     Character& operator=(const Character& other);
@@ -47,4 +45,4 @@ private:
 };
 
 
-#endif //FMI_COURCE_PROJECT_DND_CHARACTER_HPP
+#endif

@@ -1,7 +1,3 @@
-//
-// Created by vorte on 5/20/2025.
-//
-
 #include "Character.hpp"
 
 #include <utility>
@@ -10,6 +6,10 @@
 #include "../item/Weapon.hpp"
 #include "../item/Spell.hpp"
 #include "../monster/Monster.hpp"
+
+Character::Character()
+: name(), characterClass(CharacterClass::Human), strength(0), mana(0), maxHealth(0), currentHealth(0),
+  armor(nullptr), weapon(nullptr), spell(nullptr) {}
 
 Character::Character(std::string  name, CharacterClass characterClass)
 : name(std::move(name)), characterClass(characterClass), strength(0), mana(0), maxHealth(0), currentHealth(0),
