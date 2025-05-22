@@ -2,7 +2,7 @@
 #include "../character/Character.hpp"
 #include <ctime>
 
-Monster::Monster(const std::string &name, size_t level)
+Monster::Monster(const std::string &name, unsigned int level)
 : name(name), strength(25 + 10 * (level-1)), mana(25 + 10 * (level - 1)), maxHealth(50 + 10 * (level - 1)),
   currentHealth(static_cast<double>(maxHealth)), takenDamageMult(Monster::getStartingTakenDamageMult(level))
 {}
@@ -24,7 +24,7 @@ void Monster::dealDamage(Character &character) const {
     }
 }
 
-double Monster::getStartingTakenDamageMult(size_t level) {
+double Monster::getStartingTakenDamageMult(unsigned int level) {
     double result = 15;
     for(size_t i = 0; i < level - 1; ++i) {
         result += result * 0.05;

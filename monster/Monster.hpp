@@ -13,14 +13,14 @@ class Character;
 
 class Monster {
 public:
-    Monster(const std::string& name, size_t level);
+    Monster(const std::string& name, unsigned level);
     void takeDamage(double damage);
     void dealDamage(Character& character) const;
     bool isAlive();
     std::ostream& print(std::ostream& os = std::cout) const;
-    static double getStartingTakenDamageMult(size_t level);
-
     double getCurrentHealth() const;
+
+    static double getStartingTakenDamageMult(unsigned level);
 private:
     std::string name;
     size_t strength, mana, maxHealth;
