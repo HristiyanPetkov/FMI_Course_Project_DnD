@@ -27,6 +27,8 @@ target_sources(
             battle/BattleSystem.hpp
             map/GameMap.cpp
             map/GameMap.hpp
+            map/Direction.cpp
+            map/Direction.hpp
             map/tile/Tile.cpp
             map/tile/Tile.hpp
             map/tile/CharacterTile.cpp
@@ -43,6 +45,8 @@ target_sources(
             map/GameMapFactory.hpp
             game/Game.cpp
             game/Game.hpp
+            game/InputCommand.cpp
+            game/InputCommand.hpp
 )
 
 add_executable(DnD_application)

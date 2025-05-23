@@ -3,6 +3,7 @@
 
 
 #include "../map/GameMap.hpp"
+#include "../character/Character.hpp"
 
 class Game {
 public:

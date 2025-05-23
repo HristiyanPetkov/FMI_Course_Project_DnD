@@ -6,13 +6,11 @@
 #include <string>
 #include <vector>
 
+#include "Direction.hpp"
 #include "../item/Item.hpp"
 #include "../monster/Monster.hpp"
 #include "../character/Character.hpp"
 #include "tile/Tile.hpp"
-
-enum class Direction {UP, RIGHT, DOWN, LEFT};
-std::istream& operator>>(std::istream& is, Direction& direction);
 
 class GameMap {
 public:
@@ -42,7 +40,5 @@ private:
     bool canMove(Direction direction);
     void movePlayer(Character& character, Direction direction);
 };
-
-
 
 #endif

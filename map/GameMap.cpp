@@ -8,30 +8,6 @@
 #include "tile/MonsterTile.hpp"
 #include "tile/TreasureTile.hpp"
 
-std::istream& operator>>(std::istream& is, Direction& direction) {
-    char input;
-    is >> input;
-
-    switch(_tolower(input)) {
-        case 'w':
-            direction = Direction::UP;
-            break;
-        case 'a':
-            direction = Direction::LEFT;
-            break;
-        case 's':
-            direction = Direction::DOWN;
-            break;
-        case 'd':
-            direction = Direction::RIGHT;
-            break;
-        default:
-            throw std::invalid_argument("Invalid Direction");
-    }
-
-    return is;
-}
-
 GameMap::GameMap(unsigned int level)
 : width(10), height(10), numberOfMonsters(2), numberOfTreasures(2), map(), characterX(1), characterY(1) {
     calculateLevelParameters(level);
