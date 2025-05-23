@@ -10,9 +10,9 @@ TEST_CASE("Character initialization", "[Character]") {
         std::ostringstream oss;
         human.print(oss);
         std::string output = oss.str();
-        REQUIRE(output.find("Strength: 30") != std::string::npos);
-        REQUIRE(output.find("Mana: 20") != std::string::npos);
-        REQUIRE(human.getCurrentHealth() == 50);
+        REQUIRE(output.find("Strength: 45") != std::string::npos);
+        REQUIRE(output.find("Mana: 30") != std::string::npos);
+        REQUIRE(human.getCurrentHealth() == 80);
     }
 
     SECTION("Mage stats are correct") {
@@ -20,8 +20,9 @@ TEST_CASE("Character initialization", "[Character]") {
         std::ostringstream oss;
         mage.print(oss);
         std::string output = oss.str();
-        REQUIRE(output.find("Strength: 10") != std::string::npos);
-        REQUIRE(output.find("Mana: 40") != std::string::npos);
+        REQUIRE(output.find("Strength: 25") != std::string::npos);
+        REQUIRE(output.find("Mana: 70") != std::string::npos);
+        REQUIRE(mage.getCurrentHealth() == 100);
     }
 
     SECTION("Warrior stats are correct") {
@@ -29,8 +30,9 @@ TEST_CASE("Character initialization", "[Character]") {
         std::ostringstream oss;
         warrior.print(oss);
         std::string output = oss.str();
-        REQUIRE(output.find("Strength: 40") != std::string::npos);
-        REQUIRE(output.find("Mana: 10") != std::string::npos);
+        REQUIRE(output.find("Strength: 60") != std::string::npos);
+        REQUIRE(output.find("Mana: 25") != std::string::npos);
+        REQUIRE(warrior.getCurrentHealth() == 120);
     }
 }
 
@@ -47,13 +49,13 @@ TEST_CASE("Character heals correctly", "[Character]") {
     SECTION("Heal below 50% health brings to 50%") {
         char1.takeDamage(45.0);
         char1.heal();
-        REQUIRE(char1.getCurrentHealth() == 25);
+        REQUIRE(char1.getCurrentHealth() == 40);
     }
 
     SECTION("Heal above 50% increases by 20%") {
-        char1.takeDamage(10.0); // 40 HP
-        char1.heal(); // +10 (20%)
-        REQUIRE(char1.getCurrentHealth() == 50);
+        char1.takeDamage(30.0);
+        char1.heal();
+        REQUIRE(char1.getCurrentHealth() == 66);
     }
 
     SECTION("Overheal results in maxHealth") {
@@ -61,7 +63,7 @@ TEST_CASE("Character heals correctly", "[Character]") {
         std::ostringstream oss;
         char1.print(oss);
         std::string output = oss.str();
-        REQUIRE(char1.getCurrentHealth() == 50);
+        REQUIRE(char1.getCurrentHealth() == 80);
     }
 }
 
@@ -89,7 +91,7 @@ TEST_CASE("Character copy constructor and assignment operator", "[Character]") {
 }
 
 TEST_CASE("Character equips new items", "[Character]") {
-    Character character("Herp", CharacterClass::Human);
+    Character character("Hero", CharacterClass::Human);
 
     SECTION("Character equips new Armor") {
         Item* armor = new Armor("Leather Armor", 50);
@@ -99,12 +101,12 @@ TEST_CASE("Character equips new items", "[Character]") {
         character.print(oss);
         std::string output = oss.str();
         REQUIRE(output.find("Leather Armor 50") != std::string::npos);
-        REQUIRE(character.getCurrentHealth() == 40);
+        REQUIRE(character.getCurrentHealth() == 70);
 
         delete armor;
     }
 
-    SECTION("Character equips new Armor") {
+    SECTION("Character equips new Weapon") {
         Item* weapon = new Weapon("Steel Sword", 50);
         character.equipItem(weapon, ItemType::WEAPON);
         std::ostringstream oss;
@@ -115,7 +117,7 @@ TEST_CASE("Character equips new items", "[Character]") {
         delete weapon;
     }
 
-    SECTION("Character equips new Armor") {
+    SECTION("Character equips new Spell") {
         Item* spell = new Spell("Ice Spear", 50);
         character.equipItem(spell, ItemType::SPELL);
         std::ostringstream oss;

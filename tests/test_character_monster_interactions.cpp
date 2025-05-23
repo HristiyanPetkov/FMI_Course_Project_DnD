@@ -7,6 +7,6 @@ TEST_CASE("Characters and Monsters deal damage to each other ", "[Character, Mon
     Character hero("Hero", CharacterClass::Human);
     hero.dealDamage(dragon, Character::AttackType::WEAPON);
     dragon.dealDamage(hero);
-    REQUIRE_THAT(dragon.getCurrentHealth(), Catch::Matchers::WithinRel(19.4, 1e-4));
-    REQUIRE_THAT(hero.getCurrentHealth(), Catch::Matchers::WithinRel(25, 1e-4));
+    REQUIRE_THAT(dragon.getCurrentHealth(), Catch::Matchers::WithinRel(4.1, 1e-4));
+    REQUIRE_THAT(hero.getCurrentHealth(), Catch::Matchers::WithinRel(55, 1e-4));
 }
