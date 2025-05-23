@@ -3,8 +3,7 @@
 
 #include <iostream>
 #include <string>
-
-enum class ItemType { ARMOR, WEAPON, SPELL };
+#include "ItemType.hpp"
 
 class Item {
 public:
@@ -13,6 +12,8 @@ public:
     virtual ~Item() = default;
     virtual Item* clone() const;
     std::ostream& print(std::ostream& os = std::cout) const;
+    void serialize(std::ostream &os);
+    static Item *deserialize(std::istream &is, ItemType type);
 protected:
     virtual std::string getType() const;
     virtual double getBonusMultiplier() const;

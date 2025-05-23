@@ -9,8 +9,10 @@ public:
     virtual char getDisplayCharacter() const = 0;
     virtual bool isEmpty();
     virtual Tile* changeOnExpended();
-    virtual Tile* clone() const = 0;
+    virtual void serialize(std::ostream& os);
+    static Tile* deserialize(std::istream &is);
     virtual ~Tile() = default;
+    virtual Tile* clone() const = 0;
 };
 
 

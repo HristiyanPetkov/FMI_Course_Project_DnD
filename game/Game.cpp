@@ -1,8 +1,12 @@
+#include <fstream>
 #include "Game.hpp"
 #include "../map/GameMapFactory.hpp"
 #include "../map/Direction.hpp"
 #include "../character/CharacterFactory.hpp"
 #include "InputCommand.hpp"
+
+Game::Game()
+: level(0), player(), currentMap() {}
 
 Game::Game(unsigned int level)
 : level(level),
@@ -21,7 +25,6 @@ void Game::start() {
             std::cin >> command;
             std::cin.ignore();
             switch(command) {
-
                 case InputCommand::MOVE_UP:
                 case InputCommand::MOVE_LEFT:
                 case InputCommand::MOVE_DOWN:
@@ -37,7 +40,16 @@ void Game::start() {
                     player.print();
                     break;
                 case InputCommand::EXIT:
-//                    save();
+                    std::cout << "Do you wish to save the game?(y):";
+                    char answer;
+                    std::cin >> answer;
+                    std::cin.ignore();
+                    if(answer == 'y') {
+                        std::cout << "Enter file path:";
+                        std::string filePath;
+                        std::getline(std::cin, filePath);
+                        save(filePath);
+                    }
                     return;
             }
         } catch(std::exception& e) {
@@ -45,4 +57,34 @@ void Game::start() {
         }
     }
     std::cout << "You Died" << std::endl;
+}
+
+void Game::save(const std::string& filePath) {
+    std::ofstream file(filePath, std::ios::trunc);
+    if(!file) {
+        throw std::runtime_error("cannot open file for writing");
+    }
+    file << level << std::endl;
+    player.serialize(file);
+    currentMap.serialize(file);
+}
+
+Game Game::loadFromFile(const std::string &filePath) {
+    std::ifstream file(filePath);
+    if(!file) {
+        throw std::runtime_error("Cannot open file for reading");
+    }
+    unsigned level;
+    Character player;
+    GameMap map;
+    Game game;
+
+    file >> level;
+    player.deserialize(file);
+    map.deserialize(file);
+
+    game.level = level;
+    game.player = player;
+    game.currentMap = map;
+    return game;
 }

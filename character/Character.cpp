@@ -2,6 +2,7 @@
 
 #include <utility>
 #include <cstring>
+#include <iomanip>
 #include "../item/Armor.hpp"
 #include "../item/Weapon.hpp"
 #include "../item/Spell.hpp"
@@ -205,4 +206,18 @@ void Character::increaseStat(const std::string& stat, unsigned int points) {
     } else {
         throw std::invalid_argument("Invalid stat");
     }
+}
+
+void Character::serialize(std::ostream &os) {
+    os << std::quoted(name) << " " << characterClass << " " << strength << " " << mana << " " << maxHealth << " " << currentHealth << std::endl;
+    armor->serialize(os);
+    weapon->serialize(os);
+    spell->serialize(os);
+}
+
+void Character::deserialize(std::istream &is) {
+    is >> std::quoted(name) >> characterClass >> strength >> mana >> maxHealth >> currentHealth;
+    armor = Item::deserialize(is, ItemType::ARMOR);
+    weapon = Item::deserialize(is, ItemType::WEAPON);
+    spell = Item::deserialize(is, ItemType::SPELL);
 }

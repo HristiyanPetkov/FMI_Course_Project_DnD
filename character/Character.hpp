@@ -6,6 +6,7 @@
 #include "CharacterClass.hpp"
 #include "../item/Item.hpp"
 #include "../item/Weapon.hpp"
+#include "../item/ItemType.hpp"
 #include <iostream>
 
 class Monster;
@@ -27,10 +28,11 @@ public:
     std::ostream& print(std::ostream& os = std::cout) const;
     void equipItem(const Item* item, ItemType type);
     double getCurrentHealth() const;
-
     static Character::AttackType chooseAttack();
-
     void levelUp();
+    void serialize(std::ostream &os);
+
+    void deserialize(std::istream &is);
 
 private:
     std::string name;

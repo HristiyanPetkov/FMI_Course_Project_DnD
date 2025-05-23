@@ -3,6 +3,7 @@
 
 
 #include "Tile.hpp"
+#include "../../item/ItemType.hpp"
 
 class TreasureTile : public Tile {
 public:
@@ -15,6 +16,7 @@ public:
     void apply(Character &character) override;
     char getDisplayCharacter() const override;
     Tile *changeOnExpended() override;
+    void serialize(std::ostream &os) override;
     Tile *clone() const override;
     ~TreasureTile() override;
 private:

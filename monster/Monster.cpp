@@ -1,6 +1,10 @@
 #include "Monster.hpp"
 #include "../character/Character.hpp"
 #include <ctime>
+#include <iomanip>
+
+Monster::Monster()
+: name(), strength(0), mana(0), maxHealth(0), currentHealth(0), takenDamageMult(0) {}
 
 Monster::Monster(const std::string &name, unsigned int level)
 : name(name), strength(25 + 10 * (level-1)), mana(25 + 10 * (level - 1)), maxHealth(50 + 10 * (level - 1)),
@@ -45,4 +49,12 @@ std::ostream &Monster::print(std::ostream &os) const {
 
 double Monster::getCurrentHealth() const {
     return currentHealth;
+}
+
+void Monster::serialize(std::ostream &os) {
+    os << std::quoted(name) << " " << strength << " " << mana << " " << maxHealth << " " << currentHealth << " " << takenDamageMult << std::endl;
+}
+
+void Monster::deserialize(std::istream &is) {
+    is >> std::quoted(name) >> strength >> mana >> maxHealth >> currentHealth >> takenDamageMult;
 }

@@ -21,6 +21,8 @@ target_sources(
             item/Weapon.hpp
             item/Spell.cpp
             item/Spell.hpp
+            item/ItemType.cpp
+            item/ItemType.hpp
             monster/Monster.cpp
             monster/Monster.hpp
             battle/BattleSystem.cpp

@@ -7,13 +7,16 @@
 
 class Game {
 public:
-    explicit Game(unsigned level = 1);
+    Game();
+    explicit Game(unsigned level);
     explicit Game(const Character& character, unsigned level = 1);
     void start();
+    static Game loadFromFile(const std::string& filePath);
 private:
     unsigned level;
     Character player;
     GameMap currentMap;
+    void save(const std::string& filePath);
 };
 
 

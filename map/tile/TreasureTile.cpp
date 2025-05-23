@@ -70,3 +70,8 @@ Tile *TreasureTile::changeOnExpended() {
     delete this;
     return new EmptyTile();
 }
+
+void TreasureTile::serialize(std::ostream &os) {
+    os << getDisplayCharacter() << " " << type << " ";
+    item->serialize(os);
+}

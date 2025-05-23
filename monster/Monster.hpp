@@ -13,6 +13,7 @@ class Character;
 
 class Monster {
 public:
+    Monster();
     Monster(const std::string& name, unsigned level);
     void takeDamage(double damage);
     void dealDamage(Character& character) const;
@@ -21,6 +22,11 @@ public:
     double getCurrentHealth() const;
 
     static double getStartingTakenDamageMult(unsigned level);
+
+    void serialize(std::ostream &os);
+
+    void deserialize(std::istream &is);
+
 private:
     std::string name;
     size_t strength, mana, maxHealth;

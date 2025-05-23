@@ -24,3 +24,8 @@ Tile *MonsterTile::changeOnExpended() {
 Tile *MonsterTile::clone() const {
     return new MonsterTile(*this);
 }
+
+void MonsterTile::serialize(std::ostream &os) {
+    os << getDisplayCharacter() << " ";
+    monster.serialize(os);
+}

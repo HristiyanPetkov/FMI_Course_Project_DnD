@@ -8,6 +8,9 @@
 #include "tile/MonsterTile.hpp"
 #include "tile/TreasureTile.hpp"
 
+GameMap::GameMap()
+: width(0), height(0), numberOfMonsters(0), numberOfTreasures(0), map(), characterX(0), characterY(0) {}
+
 GameMap::GameMap(unsigned int level)
 : width(10), height(10), numberOfMonsters(2), numberOfTreasures(2), map(), characterX(1), characterY(1) {
     calculateLevelParameters(level);
@@ -215,3 +218,26 @@ void GameMap::movePlayer(Character& character, Direction direction) {
 bool GameMap::onNextLevelField() const {
     return characterY == height - 2 && characterX == width - 2;
 }
+
+void GameMap::serialize(std::ostream &os) {
+    os << width << " " << height << " " << numberOfMonsters << " " << numberOfTreasures << " " << characterX << " " << characterY << std::endl;
+    for(size_t y = 0; y < height; ++y) {
+        for(size_t x = 0; x < width; ++x) {
+            map[y][x]->serialize(os);
+        }
+    }
+}
+
+void GameMap::deserialize(std::istream &is) {
+    GameMap newMap;
+    is >> newMap.width >> newMap.height >> newMap.numberOfMonsters >> newMap.numberOfTreasures >> newMap.characterX >> newMap.characterY;
+    newMap.map.resize(newMap.height, std::vector<Tile*>(newMap.width, nullptr));
+    for(size_t y = 0; y < newMap.height; ++y) {
+        for(size_t x = 0; x < newMap.width; ++x) {
+            newMap.map[y][x] = Tile::deserialize(is);
+        }
+    }
+    swap(newMap);
+}
+
+//width(10), height(10), numberOfMonsters(2), numberOfTreasures(2), map(), characterX(1), characterY(1)

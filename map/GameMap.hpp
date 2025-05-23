@@ -14,6 +14,7 @@
 
 class GameMap {
 public:
+    GameMap();
     explicit GameMap(unsigned level);
 //    explicit GameMap(const std::string& path = "../map_assets/example.txt");
     GameMap(const GameMap& other);
@@ -22,9 +23,9 @@ public:
 
     void render();
     void move(Character& character, Direction direction);
-
     bool onNextLevelField() const;
-
+    void serialize(std::ostream &os);
+    void deserialize(std::istream &is);
 private:
     size_t width, height, numberOfMonsters, numberOfTreasures;
     std::vector<std::vector<Tile*>> map;
