@@ -13,7 +13,6 @@ Game::Game(const Character &character, unsigned int level)
 : level(level), player(character), currentMap(GameMapFactory::createFromLevel(level)) {}
 
 void Game::start() {
-//    Direction directionInput;
     InputCommand command;
     while(player.isAlive()) {
 //        system("clear");
@@ -29,6 +28,7 @@ void Game::start() {
                 case InputCommand::MOVE_RIGHT:
                     currentMap.move(player, commandToDirection(command));
                     if(currentMap.onNextLevelField()) {
+                        player.levelUp();
                         std::cout << "Generating new map" << std::endl;
                         currentMap = GameMapFactory::createFromLevel(++level);
                     }

@@ -29,6 +29,9 @@ public:
     double getCurrentHealth() const;
 
     static Character::AttackType chooseAttack();
+
+    void levelUp();
+
 private:
     std::string name;
     CharacterClass characterClass;
@@ -42,6 +45,8 @@ private:
     void setInitialEquipment();
     void copyEquipment(const Character& other);
     void swap(Character &character);
+
+    void increaseStat(const std::string& stat, unsigned int points);
 };
 
 

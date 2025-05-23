@@ -175,3 +175,34 @@ Character::AttackType Character::chooseAttack() {
         }
     }
 }
+
+void Character::levelUp() {
+    unsigned attrPoints = 30, inputPoints;
+    std::string stat;
+    std::cout << "Level UP!" << std::endl;
+    while(attrPoints != 0) {
+        std::cout << "You have " << attrPoints << " points left" << std::endl;
+        std::cout << "Increase stat(stat points): ";
+        std::cin >> stat >> inputPoints;
+        std::cin.clear();
+        if(attrPoints >= inputPoints) {
+            attrPoints -= inputPoints;
+            increaseStat(stat, inputPoints);
+        } else {
+            std::cout << "You don't have enough points for that" << std::endl;
+        }
+    }
+}
+
+void Character::increaseStat(const std::string& stat, unsigned int points) {
+    if(stat == "strength") {
+        strength += points;
+    } else if(stat == "mana") {
+        mana += points;
+    } else if(stat == "hp") {
+        maxHealth += points;
+        currentHealth += points;
+    } else {
+        throw std::invalid_argument("Invalid stat");
+    }
+}
