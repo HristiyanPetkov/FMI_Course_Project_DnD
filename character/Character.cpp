@@ -22,22 +22,22 @@ Character::Character(std::string  name, CharacterClass characterClass)
 void Character::setInitialStats() {
     switch(characterClass) {
         case CharacterClass::Human:
-            strength = 30;
-            mana = 20;
-            maxHealth = 50;
-            currentHealth = 50;
+            strength = 45;
+            mana = 30;
+            maxHealth = 80;
+            currentHealth = 80;
             break;
         case CharacterClass::Mage:
-            strength = 10;
-            mana = 40;
-            maxHealth = 50;
-            currentHealth = 50;
+            strength = 25;
+            mana = 70;
+            maxHealth = 100;
+            currentHealth = 100;
             break;
         case CharacterClass::Warrior:
-            strength = 40;
-            mana = 10;
-            maxHealth = 50;
-            currentHealth = 50;
+            strength = 60;
+            mana = 25;
+            maxHealth = 120;
+            currentHealth = 120;
             break;
         default:
             throw std::invalid_argument("Character class is not defined");
@@ -138,21 +138,22 @@ bool Character::isAlive() const {
     return currentHealth != 0;
 }
 
-void Character::equipItem(const Item *item) {
+void Character::equipItem(const Item *item, ItemType itemType) {
     if (!item) return;
 
-    std::string type = item->getType();
-    if(std::strcmp("Armor", type.c_str()) == 0) {
-        delete armor;
-        armor = item->clone();
-    } else if(std::strcmp("Weapon", type.c_str()) == 0) {
-        delete weapon;
-        weapon = item->clone();
-    } else if(std::strcmp("Spell", type.c_str()) == 0) {
-        delete spell;
-        spell = item->clone();
-    } else {
-        throw std::invalid_argument("Invalid item type");
+    switch(itemType) {
+        case ItemType::ARMOR:
+            delete armor;
+            armor = item->clone();
+            break;
+        case ItemType::WEAPON:
+            delete weapon;
+            weapon = item->clone();
+            break;
+        case ItemType::SPELL:
+            delete spell;
+            spell = item->clone();
+            break;
     }
 }
 
@@ -163,15 +164,14 @@ double Character::getCurrentHealth() const {
 Character::AttackType Character::chooseAttack() {
     while(true) {
         std::cout << "Attack type: 1.Weapon, 2.Spell" << std::endl;
-        int choice;
+        std::string choice;
         std::cin >> choice;
-        switch(choice) {
-            case 1:
-                return Character::AttackType::WEAPON;
-            case 2:
-                return Character::AttackType::SPELL;
-            default:
-                std::cout << "Invalid attack type" << std::endl;
+        if(choice == "1" || choice == "Weapon") {
+            return Character::AttackType::WEAPON;
+        } else if(choice == "2" || choice == "Spell") {
+            return Character::AttackType::SPELL;
+        } else {
+            std::cout << "Invalid attack type" << std::endl;
         }
     }
 }

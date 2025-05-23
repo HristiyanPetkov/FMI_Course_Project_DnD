@@ -1,12 +1,10 @@
-//
-// Created by vorte on 5/20/2025.
-//
-
 #ifndef FMI_COURCE_PROJECT_DND_ITEM_HPP
 #define FMI_COURCE_PROJECT_DND_ITEM_HPP
 
 #include <iostream>
 #include <string>
+
+enum class ItemType { ARMOR, WEAPON, SPELL };
 
 class Item {
 public:
@@ -15,8 +13,8 @@ public:
     virtual ~Item() = default;
     virtual Item* clone() const;
     std::ostream& print(std::ostream& os = std::cout) const;
-    virtual std::string getType() const;
 protected:
+    virtual std::string getType() const;
     virtual double getBonusMultiplier() const;
 private:
     std::string name;
@@ -24,4 +22,4 @@ private:
 };
 
 
-#endif //FMI_COURCE_PROJECT_DND_ITEM_HPP
+#endif

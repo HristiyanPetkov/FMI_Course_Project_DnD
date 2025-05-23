@@ -25,7 +25,7 @@ public:
     void dealDamage(Monster& monster, AttackType attackType) const;
     bool isAlive() const;
     std::ostream& print(std::ostream& os = std::cout) const;
-    void equipItem(const Item* item);
+    void equipItem(const Item* item, ItemType type);
     double getCurrentHealth() const;
 
     static Character::AttackType chooseAttack();

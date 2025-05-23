@@ -1,7 +1,3 @@
-//
-// Created by vorte on 5/20/2025.
-//
-
 #include "Item.hpp"
 
 Item::Item(const std::string& name, double bonus)

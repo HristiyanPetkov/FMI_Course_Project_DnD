@@ -1,7 +1,3 @@
-//
-// Created by vorte on 5/20/2025.
-//
-
 #include "Armor.hpp"
 
 Armor::Armor(const std::string &name, double bonus) : Item(name, bonus) {}

@@ -93,7 +93,7 @@ TEST_CASE("Character equips new items", "[Character]") {
 
     SECTION("Character equips new Armor") {
         Item* armor = new Armor("Leather Armor", 50);
-        character.equipItem(armor);
+        character.equipItem(armor, ItemType::ARMOR);
         character.takeDamage(20);
         std::ostringstream oss;
         character.print(oss);
@@ -106,7 +106,7 @@ TEST_CASE("Character equips new items", "[Character]") {
 
     SECTION("Character equips new Armor") {
         Item* weapon = new Weapon("Steel Sword", 50);
-        character.equipItem(weapon);
+        character.equipItem(weapon, ItemType::WEAPON);
         std::ostringstream oss;
         character.print(oss);
         std::string output = oss.str();
@@ -117,7 +117,7 @@ TEST_CASE("Character equips new items", "[Character]") {
 
     SECTION("Character equips new Armor") {
         Item* spell = new Spell("Ice Spear", 50);
-        character.equipItem(spell);
+        character.equipItem(spell, ItemType::SPELL);
         std::ostringstream oss;
         character.print(oss);
         std::string output = oss.str();

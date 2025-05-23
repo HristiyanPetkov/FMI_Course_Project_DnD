@@ -6,8 +6,8 @@
 
 class TreasureTile : public Tile {
 public:
-    explicit TreasureTile(Item* item);
-    explicit TreasureTile(const Item& item);
+    TreasureTile(Item* item, ItemType type);
+    TreasureTile(const Item& item, ItemType type);
     TreasureTile(const TreasureTile& other);
     TreasureTile& operator=(const TreasureTile& other);
     static Tile* generateRandomTreasureTile(unsigned level);
@@ -19,6 +19,8 @@ public:
     ~TreasureTile() override;
 private:
     Item* item;
+    ItemType type;
+    static double getBonusFromLevel(unsigned level);
 };
 
 

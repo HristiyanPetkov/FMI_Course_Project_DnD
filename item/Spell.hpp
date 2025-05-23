@@ -1,7 +1,3 @@
-//
-// Created by vorte on 5/20/2025.
-//
-
 #ifndef FMI_COURCE_PROJECT_DND_SPELL_HPP
 #define FMI_COURCE_PROJECT_DND_SPELL_HPP
 
@@ -13,10 +9,10 @@ public:
     Spell(const std::string& name, double bonus);
     ~Spell() override = default;
     Item *clone() const override;
-    std::string getType() const override;
 protected:
+    std::string getType() const override;
     double getBonusMultiplier() const override;
 };
 
 
-#endif //FMI_COURCE_PROJECT_DND_SPELL_HPP
+#endif

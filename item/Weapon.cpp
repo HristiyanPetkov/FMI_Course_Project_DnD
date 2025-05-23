@@ -1,7 +1,3 @@
-//
-// Created by vorte on 5/20/2025.
-//
-
 #include "Weapon.hpp"
 
 Weapon::Weapon(const std::string &name, double bonus) : Item(name, bonus) {}
