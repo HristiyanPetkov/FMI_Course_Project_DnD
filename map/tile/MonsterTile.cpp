@@ -25,7 +25,7 @@ Tile *MonsterTile::clone() const {
     return new MonsterTile(*this);
 }
 
-void MonsterTile::serialize(std::ostream &os) {
+void MonsterTile::serialize(std::ostream &os) const {
     os << getDisplayCharacter() << " ";
     monster.serialize(os);
 }

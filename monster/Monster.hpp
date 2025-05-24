@@ -18,11 +18,8 @@ public:
     double getCurrentHealth() const;
 
     static double getStartingTakenDamageMult(unsigned level);
-
-    void serialize(std::ostream &os);
-
+    void serialize(std::ostream &os) const;
     void deserialize(std::istream &is);
-
 private:
     std::string name;
     size_t strength, mana, maxHealth;

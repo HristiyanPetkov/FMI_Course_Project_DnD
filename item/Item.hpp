@@ -12,7 +12,7 @@ public:
     virtual ~Item() = default;
     virtual Item* clone() const;
     std::ostream& print(std::ostream& os = std::cout) const;
-    void serialize(std::ostream &os);
+    void serialize(std::ostream &os) const;
     static Item *deserialize(std::istream &is, ItemType type);
 protected:
     virtual std::string getType() const;

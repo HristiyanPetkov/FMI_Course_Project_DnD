@@ -30,8 +30,7 @@ public:
     double getCurrentHealth() const;
     static Character::AttackType chooseAttack();
     void levelUp();
-    void serialize(std::ostream &os);
-
+    void serialize(std::ostream &os) const;
     void deserialize(std::istream &is);
 
 private:

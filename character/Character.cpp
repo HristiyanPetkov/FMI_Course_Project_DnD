@@ -208,7 +208,7 @@ void Character::increaseStat(const std::string& stat, unsigned int points) {
     }
 }
 
-void Character::serialize(std::ostream &os) {
+void Character::serialize(std::ostream &os) const {
     os << std::quoted(name) << " " << characterClass << " " << strength << " " << mana << " " << maxHealth << " " << currentHealth << std::endl;
     armor->serialize(os);
     weapon->serialize(os);

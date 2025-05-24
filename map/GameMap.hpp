@@ -24,7 +24,7 @@ public:
     void render();
     void move(Character& character, Direction direction);
     bool onNextLevelField() const;
-    void serialize(std::ostream &os);
+    void serialize(std::ostream &os) const;
     void deserialize(std::istream &is);
 private:
     size_t width, height, numberOfMonsters, numberOfTreasures;

@@ -219,7 +219,7 @@ bool GameMap::onNextLevelField() const {
     return characterY == height - 2 && characterX == width - 2;
 }
 
-void GameMap::serialize(std::ostream &os) {
+void GameMap::serialize(std::ostream &os) const {
     os << width << " " << height << " " << numberOfMonsters << " " << numberOfTreasures << " " << characterX << " " << characterY << std::endl;
     for(size_t y = 0; y < height; ++y) {
         for(size_t x = 0; x < width; ++x) {

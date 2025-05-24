@@ -51,7 +51,7 @@ double Monster::getCurrentHealth() const {
     return currentHealth;
 }
 
-void Monster::serialize(std::ostream &os) {
+void Monster::serialize(std::ostream &os) const {
     os << std::quoted(name) << " " << strength << " " << mana << " " << maxHealth << " " << currentHealth << " " << takenDamageMult << std::endl;
 }
 

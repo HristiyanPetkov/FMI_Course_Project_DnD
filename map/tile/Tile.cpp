@@ -13,7 +13,7 @@ Tile *Tile::changeOnExpended() {
     return this;
 }
 
-void Tile::serialize(std::ostream &os) {
+void Tile::serialize(std::ostream &os) const {
     os << getDisplayCharacter() << std::endl;
 }
 

@@ -27,7 +27,7 @@ std::string Item::getType() const {
     return "Common Item";
 }
 
-void Item::serialize(std::ostream &os) {
+void Item::serialize(std::ostream &os) const {
     os << std::quoted(name) << " " << bonus << std::endl;
 }
 
