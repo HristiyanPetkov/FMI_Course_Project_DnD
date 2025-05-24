@@ -17,6 +17,7 @@ private:
     Character player;
     GameMap currentMap;
     void save(const std::string& filePath);
+    void updateHighScores();
 };
 
 

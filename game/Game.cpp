@@ -4,6 +4,7 @@
 #include "../map/Direction.hpp"
 #include "../character/CharacterFactory.hpp"
 #include "InputCommand.hpp"
+#include "../highScore/HighScoreManager.hpp"
 
 Game::Game()
 : level(0), player(), currentMap() {}
@@ -57,6 +58,7 @@ void Game::start() {
         }
     }
     std::cout << "You Died" << std::endl;
+    updateHighScores();
 }
 
 void Game::save(const std::string& filePath) {
@@ -87,4 +89,8 @@ Game Game::loadFromFile(const std::string &filePath) {
     game.player = player;
     game.currentMap = map;
     return game;
+}
+
+void Game::updateHighScores() {
+    HighScoreManager::saveScore(level, player);
 }

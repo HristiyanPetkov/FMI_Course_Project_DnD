@@ -32,7 +32,11 @@ public:
     void levelUp();
     void serialize(std::ostream &os) const;
     void deserialize(std::istream &is);
+    void serializeForHighScore(std::ostream &os) const;
+    void deserializeForHighScore(std::istream &is);
 
+    bool operator>(const Character& other) const;
+    bool operator<(const Character& other) const;
 private:
     std::string name;
     CharacterClass characterClass;

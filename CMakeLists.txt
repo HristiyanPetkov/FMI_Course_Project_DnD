@@ -49,6 +49,8 @@ target_sources(
             game/Game.hpp
             game/InputCommand.cpp
             game/InputCommand.hpp
+            highScore/HighScoreManager.cpp
+            highScore/HighScoreManager.hpp
 )
 
 add_executable(DnD_application)

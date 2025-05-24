@@ -221,3 +221,19 @@ void Character::deserialize(std::istream &is) {
     weapon = Item::deserialize(is, ItemType::WEAPON);
     spell = Item::deserialize(is, ItemType::SPELL);
 }
+
+void Character::serializeForHighScore(std::ostream &os) const {
+    os << std::quoted(name) << " " << characterClass << " " << strength << " " << mana << " " << maxHealth << std::endl;
+}
+
+void Character::deserializeForHighScore(std::istream &is) {
+    is >> std::quoted(name) >> characterClass >> strength >> mana >> maxHealth;
+}
+
+bool Character::operator>(const Character &other) const {
+    return name > other.name;
+}
+
+bool Character::operator<(const Character &other) const {
+    return name < other.name;
+}
