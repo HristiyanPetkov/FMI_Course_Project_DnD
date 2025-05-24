@@ -1,9 +1,5 @@
-//
-// Created by vorte on 5/20/2025.
-//
-
-#ifndef FMI_COURCE_PROJECT_DND_MONSTER_HPP
-#define FMI_COURCE_PROJECT_DND_MONSTER_HPP
+#ifndef FMI_COURSE_PROJECT_DND_MONSTER_HPP
+#define FMI_COURSE_PROJECT_DND_MONSTER_HPP
 
 #include <iostream>
 #include <string>
@@ -35,4 +31,4 @@ private:
 };
 
 
-#endif //FMI_COURCE_PROJECT_DND_MONSTER_HPP
+#endif

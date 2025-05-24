@@ -1,5 +1,5 @@
-#ifndef FMI_COURCE_PROJECT_DND_ITEM_HPP
-#define FMI_COURCE_PROJECT_DND_ITEM_HPP
+#ifndef FMI_COURSE_PROJECT_DND_ITEM_HPP
+#define FMI_COURSE_PROJECT_DND_ITEM_HPP
 
 #include <iostream>
 #include <string>

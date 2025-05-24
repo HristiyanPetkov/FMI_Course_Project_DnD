@@ -1,5 +1,5 @@
-#ifndef FMI_COURCE_PROJECT_DND_TILE_HPP
-#define FMI_COURCE_PROJECT_DND_TILE_HPP
+#ifndef FMI_COURSE_PROJECT_DND_TILE_HPP
+#define FMI_COURSE_PROJECT_DND_TILE_HPP
 #include "../../character/Character.hpp"
 
 

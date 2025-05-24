@@ -1,5 +1,5 @@
-#ifndef FMI_COURCE_PROJECT_DND_DIRECTION_HPP
-#define FMI_COURCE_PROJECT_DND_DIRECTION_HPP
+#ifndef FMI_COURSE_PROJECT_DND_DIRECTION_HPP
+#define FMI_COURSE_PROJECT_DND_DIRECTION_HPP
 
 #include <iostream>
 #include "../game/InputCommand.hpp"

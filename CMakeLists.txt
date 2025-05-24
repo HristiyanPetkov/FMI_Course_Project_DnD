@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.22)
-project(FMI_Cource_Project_DnD)
+project(FMI_Course_Project_DnD)
 
 set(CMAKE_CXX_STANDARD 20)
 

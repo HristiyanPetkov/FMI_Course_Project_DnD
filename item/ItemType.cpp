@@ -9,6 +9,7 @@ std::ostream& operator<<(std::ostream& os, ItemType type) {
         case ItemType::SPELL:
             return os << "Spell";
     }
+    throw std::invalid_argument("Invalid type");
 }
 
 std::istream& operator>>(std::istream& is, ItemType& type) {

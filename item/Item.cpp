@@ -44,4 +44,5 @@ Item* Item::deserialize(std::istream &is, ItemType type) {
         case ItemType::SPELL:
             return new Spell(name, bonus);
     }
+    throw std::invalid_argument("Item type is not supported");
 }
