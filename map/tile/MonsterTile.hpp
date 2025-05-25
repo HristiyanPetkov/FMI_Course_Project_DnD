@@ -14,6 +14,9 @@ public:
     void serialize(std::ostream &os) const override;
     Tile *clone() const override;
     ~MonsterTile() override = default;
+
+    void renderSFML(sf::RenderWindow &window, float x, float y, float tileSize) override;
+
 private:
     Monster monster;
 };

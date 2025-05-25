@@ -3,6 +3,8 @@ project(FMI_Course_Project_DnD)
 
 set(CMAKE_CXX_STANDARD 20)
 
+add_subdirectory(external/SFML)
+
 add_library(DnD STATIC)
 target_sources(
         DnD
@@ -53,6 +55,14 @@ target_sources(
             highScore/HighScoreManager.hpp
 )
 
+target_link_libraries(
+        DnD
+        PRIVATE
+            sfml-graphics
+            sfml-window
+            sfml-system
+)
+
 add_executable(DnD_application)
 target_sources(
         DnD_application
@@ -63,6 +73,17 @@ target_link_libraries(
         DnD_application
         PRIVATE
             DnD
+#            sfml-graphics
+#            sfml-window
+#            sfml-system
+)
+
+get_target_property(SFML_INCLUDE_DIRS sfml-graphics INTERFACE_INCLUDE_DIRECTORIES)
+message("SFML include dirs (evaluated): ${SFML_INCLUDE_DIRS}")
+
+target_include_directories(DnD_application
+        PRIVATE
+        ${SFML_INCLUDE_DIRS}
 )
 
 include(CTest)

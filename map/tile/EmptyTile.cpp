@@ -13,3 +13,13 @@ Tile *EmptyTile::clone() const {
 bool EmptyTile::isEmpty() {
     return true;
 }
+
+void EmptyTile::renderSFML(sf::RenderWindow &window, float x, float y, float tileSize) {
+    sf::RectangleShape shape(sf::Vector2f(tileSize, tileSize));
+    shape.setPosition({x, y});
+    shape.setFillColor(sf::Color::White);
+    shape.setOutlineThickness(1.f);
+    shape.setOutlineColor(sf::Color::Black);
+
+    window.draw(shape);
+}

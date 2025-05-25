@@ -1,5 +1,6 @@
 #ifndef FMI_COURSE_PROJECT_DND_TILE_HPP
 #define FMI_COURSE_PROJECT_DND_TILE_HPP
+#include <SFML/Graphics.hpp>
 #include "../../character/Character.hpp"
 
 
@@ -13,6 +14,8 @@ public:
     static Tile* deserialize(std::istream &is);
     virtual ~Tile() = default;
     virtual Tile* clone() const = 0;
+
+    virtual void renderSFML(sf::RenderWindow& window, float x, float y, float tileSize) = 0;
 };
 
 

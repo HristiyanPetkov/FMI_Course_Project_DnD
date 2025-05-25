@@ -11,6 +11,8 @@ public:
     bool isEmpty() override;
     Tile *clone() const override;
     ~EmptyTile() override = default;
+
+    void renderSFML(sf::RenderWindow &window, float x, float y, float tileSize) override;
 };
 
 

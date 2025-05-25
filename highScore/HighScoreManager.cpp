@@ -23,9 +23,7 @@ void HighScoreManager::saveScore(unsigned int level, const Character &player) {
     }
 
     auto it = std::find_if(scores.begin(), scores.end(), [&](const Score& hs) {
-        if(currentScore.level > hs.level) {
-            return true;
-        } else if(currentScore.level == hs.level && currentScore.player < hs.player) {
+        if(currentScore.level > hs.level || (currentScore.level == hs.level && currentScore.player < hs.player)) {
             return true;
         }
         return false;

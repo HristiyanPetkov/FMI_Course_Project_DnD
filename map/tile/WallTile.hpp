@@ -11,6 +11,8 @@ public:
     Tile *changeOnExpended() override;
     Tile *clone() const override;
     ~WallTile() override = default;
+
+    void renderSFML(sf::RenderWindow &window, float x, float y, float tileSize) override;
 };
 
 

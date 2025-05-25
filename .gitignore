@@ -1,2 +1,4 @@
 .idea/*
 map_assets/*
+build/*
+cmake-build-debug/*

@@ -12,12 +12,15 @@ public:
     explicit Game(const Character& character, unsigned level = 1);
     void start();
     static Game loadFromFile(const std::string& filePath);
+    void startSFML();
 private:
     unsigned level;
     Character player;
     GameMap currentMap;
     void save(const std::string& filePath);
     void updateHighScores();
+
+    void checkForNextLevel();
 };
 
 

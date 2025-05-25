@@ -1,5 +1,6 @@
 #include <fstream>
 #include <random>
+#include <SFML/Graphics.hpp>
 
 #include "GameMap.hpp"
 #include "tile/WallTile.hpp"
@@ -240,4 +241,17 @@ void GameMap::deserialize(std::istream &is) {
     swap(newMap);
 }
 
-//width(10), height(10), numberOfMonsters(2), numberOfTreasures(2), map(), characterX(1), characterY(1)
+void GameMap::renderSFML(sf::RenderWindow& window) {
+    float tileSize = std::min(
+            static_cast<float>(window.getSize().x) / static_cast<float>(height),
+            static_cast<float>(window.getSize().y) / static_cast<float>(width)
+    );
+
+    for (size_t y = 0; y < height; ++y) {
+        for (size_t x = 0; x < width; ++x) {
+            float px = x * tileSize;
+            float py = y * tileSize;
+            map[y][x]->renderSFML(window, px, py, tileSize);
+        }
+    }
+}

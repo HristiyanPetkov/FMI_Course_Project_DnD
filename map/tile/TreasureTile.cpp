@@ -75,3 +75,13 @@ void TreasureTile::serialize(std::ostream &os) const {
     os << getDisplayCharacter() << " " << type << " ";
     item->serialize(os);
 }
+
+void TreasureTile::renderSFML(sf::RenderWindow &window, float x, float y, float tileSize) {
+    sf::RectangleShape shape(sf::Vector2f(tileSize, tileSize));
+    shape.setPosition({x, y});
+    shape.setFillColor(sf::Color::Yellow);
+    shape.setOutlineThickness(1.f);
+    shape.setOutlineColor(sf::Color::Black);
+
+    window.draw(shape);
+}

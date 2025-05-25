@@ -19,6 +19,9 @@ public:
     void serialize(std::ostream &os) const override;
     Tile *clone() const override;
     ~TreasureTile() override;
+
+    void renderSFML(sf::RenderWindow &window, float x, float y, float tileSize) override;
+
 private:
     Item* item;
     ItemType type;

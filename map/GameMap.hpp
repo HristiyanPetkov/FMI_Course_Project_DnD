@@ -26,6 +26,9 @@ public:
     bool onNextLevelField() const;
     void serialize(std::ostream &os) const;
     void deserialize(std::istream &is);
+
+    void renderSFML(sf::RenderWindow& window);
+
 private:
     size_t width, height, numberOfMonsters, numberOfTreasures;
     std::vector<std::vector<Tile*>> map;
