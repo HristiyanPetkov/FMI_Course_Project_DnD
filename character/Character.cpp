@@ -259,3 +259,118 @@ void Character::printSFML(sf::RenderWindow& window) {
     text.setString(ss.str());
     window.draw(text);
 }
+
+void Character::levelUpSFML(sf::RenderWindow &window) {
+    int attrPoints = 30, inputPoints;
+    bool attrPicked = false, inputPointsPicked = false;
+    std::string stat, errorMessage;
+//    std::cout << "Level UP!" << std::endl;
+//    while(attrPoints != 0) {
+//        std::cout << "You have " << attrPoints << " points left" << std::endl;
+//        std::cout << "Increase stat(stat points): ";
+//        std::cin >> stat >> inputPoints;
+//        std::cin.clear();
+//        if(attrPoints >= inputPoints) {
+//            attrPoints -= inputPoints;
+//            increaseStat(stat, inputPoints);
+//        } else {
+//            std::cout << "You don't have enough points for that" << std::endl;
+//        }
+//    }
+
+    sf::View fullScreen(sf::FloatRect({0.f, 0.f}, {1.f, 1.f}));
+    window.setView(fullScreen);
+
+    sf::Font font("resources/text_fonts/montserrat/Montserrat-Black.otf");
+    sf::Text text(font);
+
+    text.setFillColor(sf::Color::White);
+    text.setStyle(sf::Text::Bold);
+
+    window.setView(window.getDefaultView());
+
+    while (window.isOpen() && attrPoints > 0) {
+        while (const std::optional event = window.pollEvent()) {
+            if (event->is<sf::Event::Closed>()) {
+                window.close();
+            }
+
+            if (const auto* keyPressed = event->getIf<sf::Event::KeyPressed>()) {
+                switch (keyPressed->scancode) {
+                    case sf::Keyboard::Scancode::Escape:
+                        window.close();
+                        return;
+                    case sf::Keyboard::Scancode::Z:
+                        if(!attrPicked) {
+                            stat = "strength";
+                        }
+                        attrPicked = true;
+                        break;
+                    case sf::Keyboard::Scancode::X:
+                        if(!attrPicked) {
+                            stat = "mana";
+                        }
+                        attrPicked = true;
+                        break;
+                    case sf::Keyboard::Scancode::C:
+                        if(!attrPicked) {
+                            stat = "hp";
+                        }
+                        attrPicked = true;
+                        break;
+                    case sf::Keyboard::Scancode::Enter:
+                        inputPointsPicked = true;
+                        break;
+                    case sf::Keyboard::Scancode::Backspace:
+                        inputPoints /= 10;
+                        break;
+                    default:
+                        if (keyPressed->scancode >= sf::Keyboard::Scancode::Num1 &&
+                            keyPressed->scancode <= sf::Keyboard::Scancode::Num0 &&
+                            attrPicked) {
+
+                            inputPoints = (inputPoints * 10) +
+                                    static_cast<int>(sf::Keyboard::getDescription(
+                                            keyPressed->scancode).operator std::string().c_str()[0]
+                                            - '0');
+                        }
+                        break;
+                }
+            }
+
+            if (const auto resized = event->getIf<sf::Event::Resized>()) {
+                sf::FloatRect visibleArea({0, 0}, sf::Vector2f(resized->size));
+                window.setView(sf::View(visibleArea));
+            }
+        }
+
+        if(attrPicked && inputPointsPicked) {
+            if(attrPoints >= inputPoints) {
+                increaseStat(stat, inputPoints);
+                attrPoints -= inputPoints;
+                stat = "";
+                inputPointsPicked = false;
+                attrPicked = false;
+                inputPoints = 0;
+                errorMessage = "";
+            } else {
+                errorMessage = "You dont have enough attribute points";
+                inputPointsPicked = false;
+                inputPoints = 0;
+            }
+        }
+
+        window.clear(sf::Color::Black);
+
+
+        if(!attrPicked) {
+            text.setString("Z. Strength, X. Mana, C. Hp");
+        } else {
+            text.setString("Increase stats by: \n" + std::to_string(inputPoints) + '\n' + errorMessage);
+        }
+        text.setPosition(sf::Vector2f{ window.getView().getSize() / 8.f });
+        window.draw(text);
+
+        window.display();
+    }
+}

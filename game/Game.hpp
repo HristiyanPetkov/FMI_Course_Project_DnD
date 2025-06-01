@@ -5,14 +5,17 @@
 #include "../map/GameMap.hpp"
 #include "../character/Character.hpp"
 
+enum class GameDisplay { Terminal, SFML };
+
 class Game {
 public:
     Game();
     explicit Game(unsigned level);
     explicit Game(const Character& character, unsigned level = 1);
+
     void start();
     static Game loadFromFile(const std::string& filePath);
-    void startSFML();
+    void startSFML(sf::RenderWindow& window);
 private:
     unsigned level;
     Character player;

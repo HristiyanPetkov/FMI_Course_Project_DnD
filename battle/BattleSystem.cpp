@@ -14,7 +14,6 @@ bool BattleSystem::battle(Character &character, Monster &monster) {
         } else {
             monster.dealDamage(character);
         }
-        std::cout << "After: Character: " << character.getCurrentHealth() << ", Monster: " << monster.getCurrentHealth() << std::endl;
         playerTurn = !playerTurn;
     }
 

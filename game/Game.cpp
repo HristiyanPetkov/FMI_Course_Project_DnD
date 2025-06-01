@@ -99,11 +99,7 @@ void Game::updateHighScores() {
     HighScoreManager::saveScore(level, player);
 }
 
-void Game::startSFML() {
-    sf::ContextSettings settings;
-    settings.antiAliasingLevel = 0;
-    sf::RenderWindow window(sf::VideoMode({800, 600}), "SFML Grid Game", sf::State::Windowed, settings);
-    window.setFramerateLimit(60);
+void Game::startSFML(sf::RenderWindow& window) {
     sf::View map, characterInfo, menu;
 
     map.setViewport(sf::FloatRect({0.f, 0.f}, {0.75f, 1.f}));
@@ -147,7 +143,7 @@ void Game::startSFML() {
                     window.setView(map);
                     currentMap.move(player, commandToDirection(command), window);
                     if (currentMap.onNextLevelField()) {
-                        player.levelUp();
+                        player.levelUpSFML(window);
                         std::cout << "Generating new map..." << std::endl;
                         currentMap = GameMapFactory::createFromLevel(++level);
                     }

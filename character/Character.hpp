@@ -40,6 +40,9 @@ public:
     bool operator<(const Character& other) const;
 
     void printSFML(sf::RenderWindow &window);
+
+    void levelUpSFML(sf::RenderWindow &window);
+
 private:
     std::string name;
     CharacterClass characterClass;
