@@ -20,7 +20,9 @@ public:
     Tile *clone() const override;
     ~TreasureTile() override;
 
-    void renderSFML(sf::RenderWindow &window, float x, float y, float tileSize) override;
+    void apply(Character &character, sf::RenderWindow& window) override;
+protected:
+    sf::Color getColor() override;
 
 private:
     Item* item;

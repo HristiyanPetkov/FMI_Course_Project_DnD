@@ -237,3 +237,25 @@ bool Character::operator>(const Character &other) const {
 bool Character::operator<(const Character &other) const {
     return name < other.name;
 }
+
+void Character::printSFML(sf::RenderWindow& window) {
+    sf::Font font("resources/text_fonts/montserrat/Montserrat-Black.otf");
+    sf::Text text(font);
+
+    text.setPosition(sf::Vector2f{ window.getView().getSize() / 8.f });
+    text.setCharacterSize(60);
+    text.setFillColor(sf::Color::White);
+    text.setStyle(sf::Text::Bold);
+
+    std::stringstream ss;
+    ss << name << ", " << characterClass << std::endl;
+    ss << "S: " << strength << std::endl;
+    ss << "M: " << mana << std::endl;
+    ss << "Hp: " << currentHealth << "/" << maxHealth << std::endl;
+    armor->print(ss);
+    weapon->print(ss);
+    spell->print(ss);
+
+    text.setString(ss.str());
+    window.draw(text);
+}

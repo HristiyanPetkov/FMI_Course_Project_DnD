@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include <SFML/Graphics.hpp>
 #include "ItemType.hpp"
 
 class Item {
@@ -14,6 +15,8 @@ public:
     std::ostream& print(std::ostream& os = std::cout) const;
     void serialize(std::ostream &os) const;
     static Item *deserialize(std::istream &is, ItemType type);
+
+    void printSFML(sf::RenderWindow &window);
 protected:
     virtual std::string getType() const;
     virtual double getBonusMultiplier() const;

@@ -5,6 +5,10 @@ set(CMAKE_CXX_STANDARD 20)
 
 add_subdirectory(external/SFML)
 
+add_custom_target(copy_assets
+        COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_CURRENT_LIST_DIR}/resources ${CMAKE_CURRENT_BINARY_DIR}/resources
+)
+
 add_library(DnD STATIC)
 target_sources(
         DnD
@@ -57,11 +61,14 @@ target_sources(
 
 target_link_libraries(
         DnD
-        PRIVATE
+        PUBLIC
             sfml-graphics
             sfml-window
             sfml-system
 )
+
+add_dependencies(DnD copy_assets)
+
 
 add_executable(DnD_application)
 target_sources(
@@ -73,9 +80,6 @@ target_link_libraries(
         DnD_application
         PRIVATE
             DnD
-#            sfml-graphics
-#            sfml-window
-#            sfml-system
 )
 
 get_target_property(SFML_INCLUDE_DIRS sfml-graphics INTERFACE_INCLUDE_DIRECTORIES)

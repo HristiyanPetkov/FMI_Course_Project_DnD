@@ -76,12 +76,74 @@ void TreasureTile::serialize(std::ostream &os) const {
     item->serialize(os);
 }
 
-void TreasureTile::renderSFML(sf::RenderWindow &window, float x, float y, float tileSize) {
-    sf::RectangleShape shape(sf::Vector2f(tileSize, tileSize));
-    shape.setPosition({x, y});
-    shape.setFillColor(sf::Color::Yellow);
-    shape.setOutlineThickness(1.f);
-    shape.setOutlineColor(sf::Color::Black);
+sf::Color TreasureTile::getColor() {
+    return sf::Color::Yellow;
+}
 
-    window.draw(shape);
+void TreasureTile::apply(Character &character, sf::RenderWindow &window) {
+    bool choiceMade = false;
+    sf::View itemInfo, equipActions, characterInfo;
+
+    itemInfo.setViewport(sf::FloatRect({0.f, 0.f}, {0.75f, 0.75f}));
+    equipActions.setViewport(sf::FloatRect({0.f, 0.75f}, {0.75f, 0.25f}));
+    characterInfo.setViewport(sf::FloatRect({0.75f, 0.f}, {0.25f, 0.35f}));
+
+    while(!choiceMade && window.isOpen()) {
+        while (const std::optional event = window.pollEvent()) {
+            if (const auto* keyPressed = event->getIf<sf::Event::KeyPressed>()) {
+                switch (keyPressed->scancode) {
+                    case sf::Keyboard::Scancode::Y:
+                        choiceMade = true;
+                        character.equipItem(item, type);
+                        return;
+                        break;
+                    case sf::Keyboard::Scancode::N:
+                        choiceMade = true;
+                        return;
+                        break;
+                    case sf::Keyboard::Scancode::Escape:
+                        window.close();
+                    default: break;
+                }
+            }
+            if (event->is<sf::Event::Closed>()) {
+                window.close();
+            }
+            if (const auto resized = event->getIf<sf::Event::Resized>()) {
+                sf::FloatRect visibleArea({0, 0}, sf::Vector2f(resized->size));
+                window.setView(sf::View(visibleArea));
+            }
+        }
+
+        window.clear(sf::Color::Black);
+        window.setView(itemInfo);
+        item->printSFML(window);
+        window.setView(equipActions);
+
+        sf::RectangleShape shape(equipActions.getSize());
+        shape.setPosition(equipActions.getViewport().position);
+        shape.setFillColor(sf::Color::White);
+
+        window.draw(shape);
+
+        sf::Font font("resources/text_fonts/montserrat/Montserrat-Black.otf");
+        sf::Text text(font, "Y for yes");
+
+        text.setScale(equipActions.getViewport().getCenter() * 2.f);
+        text.setPosition(window.getView().getSize() / 8.f + sf::Vector2f(0.f, equipActions.getCenter().y * 0.5f));
+        text.setCharacterSize(64);
+        text.setStyle(sf::Text::Bold);
+        text.setFillColor(sf::Color::Black);
+
+        window.draw(text);
+
+        text.setString("N for no");
+        text.move({shape.getSize().x / 2.F, 0.f});
+        text.setFillColor(sf::Color::Black);
+        window.draw(text);
+
+        window.setView(characterInfo);
+        character.printSFML(window);
+        window.display();
+    }
 }

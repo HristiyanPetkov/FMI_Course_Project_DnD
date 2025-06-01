@@ -15,7 +15,9 @@ public:
     Tile *clone() const override;
     ~MonsterTile() override = default;
 
-    void renderSFML(sf::RenderWindow &window, float x, float y, float tileSize) override;
+    virtual void apply(Character& character, sf::RenderWindow& window);
+protected:
+    sf::Color getColor() override;
 
 private:
     Monster monster;

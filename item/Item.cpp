@@ -46,3 +46,17 @@ Item* Item::deserialize(std::istream &is, ItemType type) {
     }
     throw std::invalid_argument("Item type is not supported");
 }
+
+void Item::printSFML(sf::RenderWindow &window) {
+    sf::Font font("resources/text_fonts/montserrat/Montserrat-Black.otf");
+    sf::Text text(font);
+
+    text.setCharacterSize(60);
+    text.setFillColor(sf::Color::White);
+    text.setPosition(sf::Vector2f{window.getView().getSize() / 8.f });
+    std::stringstream ss;
+    ss << getType() << ": " << name << " " << bonus << std::endl;
+    text.setString(ss.str());
+
+    window.draw(text);
+}

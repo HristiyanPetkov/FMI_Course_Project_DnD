@@ -6,7 +6,7 @@
 
 class Tile {
 public:
-    virtual void apply(Character& character) = 0;
+    virtual void apply(Character& character);
     virtual char getDisplayCharacter() const = 0;
     virtual bool isEmpty();
     virtual Tile* changeOnExpended();
@@ -15,7 +15,10 @@ public:
     virtual ~Tile() = default;
     virtual Tile* clone() const = 0;
 
-    virtual void renderSFML(sf::RenderWindow& window, float x, float y, float tileSize) = 0;
+    void renderSFML(sf::RenderWindow& window, float x, float y, float tileSizeX, float tileSizeY);
+    virtual void apply(Character& character, sf::RenderWindow& window);
+protected:
+    virtual sf::Color getColor() = 0;
 };
 
 

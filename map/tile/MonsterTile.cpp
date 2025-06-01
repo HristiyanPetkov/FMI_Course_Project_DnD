@@ -30,12 +30,10 @@ void MonsterTile::serialize(std::ostream &os) const {
     monster.serialize(os);
 }
 
-void MonsterTile::renderSFML(sf::RenderWindow &window, float x, float y, float tileSize) {
-    sf::RectangleShape shape(sf::Vector2f(tileSize, tileSize));
-    shape.setPosition({x, y});
-    shape.setFillColor(sf::Color::Red);
-    shape.setOutlineThickness(1.f);
-    shape.setOutlineColor(sf::Color::Black);
+sf::Color MonsterTile::getColor() {
+    return sf::Color::Red;
+}
 
-    window.draw(shape);
+void MonsterTile::apply(Character &character, sf::RenderWindow &window) {
+    BattleSystem::battle(character, monster, window);
 }

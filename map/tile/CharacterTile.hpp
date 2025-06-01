@@ -10,7 +10,8 @@ public:
     Tile *clone() const override;
     ~CharacterTile() override = default;
 
-    void renderSFML(sf::RenderWindow &window, float x, float y, float tileSize) override;
+protected:
+    sf::Color getColor() override;
 };
 
 

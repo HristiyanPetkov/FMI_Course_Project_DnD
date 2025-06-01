@@ -21,6 +21,8 @@ private:
     void updateHighScores();
 
     void checkForNextLevel();
+
+    void visualizeMenu(sf::RenderWindow& window);
 };
 
 
