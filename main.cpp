@@ -1,5 +1,5 @@
 #include <cstring>
-#include "game/Game.hpp"
+#include "src/game/Game.hpp"
 
 void startSFML();
 
@@ -63,6 +63,9 @@ void startSFML() {
                             characterClass = CharacterClass::Warrior;
                             characterClassSelected = true;
                         }
+                        break;
+                    case sf::Keyboard::Scancode::Backspace:
+                        characterName = characterName.substr(0, characterName.size()-1);
                         break;
                     default:
                         if (keyPressed->scancode >= sf::Keyboard::Scancode::A && keyPressed->scancode <= sf::Keyboard::Scancode::Z) {

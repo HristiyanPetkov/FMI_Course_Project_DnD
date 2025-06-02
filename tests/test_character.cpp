@@ -1,8 +1,8 @@
 #include <catch2/catch_all.hpp>
-#include "../character/Character.hpp"
-#include "../item/Armor.hpp"
-#include "../item/Weapon.hpp"
-#include "../item/Spell.hpp"
+#include "../src/character/Character.hpp"
+#include "../src/item/Armor.hpp"
+#include "../src/item/Weapon.hpp"
+#include "../src/item/Spell.hpp"
 
 TEST_CASE("Character initialization", "[Character]") {
     SECTION("Human stats are correct") {
