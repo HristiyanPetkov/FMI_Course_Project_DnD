@@ -149,9 +149,7 @@ void Game::startSFML(sf::RenderWindow& window) {
                     }
                     break;
                 case InputCommand::EXIT:
-                    save("savefile.dat");
                     window.close();
-                    return;
 
                 case InputCommand::NONE:
                 default:
@@ -173,8 +171,10 @@ void Game::startSFML(sf::RenderWindow& window) {
 
     if(!player.isAlive()) {
         std::cout << "You Died" << std::endl;
+        updateHighScores();
+    } else {
+        save("savefile.txt");
     }
-    updateHighScores();
 }
 
 void Game::checkForNextLevel() {
