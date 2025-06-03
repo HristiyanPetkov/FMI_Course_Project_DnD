@@ -36,3 +36,22 @@ void HighScoreManager::saveScore(unsigned int level, const Character &player) {
         hs.player.serializeForHighScore(file);
     }
 }
+
+void HighScoreManager::displayHighScores(int amount) {
+    std::fstream file(HighScoreManager::highScorePath, std::ios::in);
+    int i = 0;
+
+    if(file) {
+        std::string line;
+        while(getline(file, line) && i++ < amount) {
+            Score highScore;
+            std::istringstream lineStream(line);
+            lineStream >> highScore.level;
+            highScore.player.deserializeForHighScore(lineStream);
+
+            std::cout << i << ") " << highScore.level << " ";
+            highScore.player.serializeForHighScore(std::cout);
+        }
+        file.close();
+    }
+}

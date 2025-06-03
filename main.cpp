@@ -1,32 +1,60 @@
 #include <cstring>
 #include "src/game/Game.hpp"
+#include "src/highScore/HighScoreManager.hpp"
 
-void startSFML();
+void startSFML(sf::RenderWindow& window);
 
 int main(int argc, char *argv[]) {
-    if(argc > 1 && strcmp(argv[1], "-t") == 0) {
-        Game game;
-        if(argc > 2) {
-            game = Game::loadFromFile(argv[1]);
+    bool terminalPlay = false;
+    bool loadFromSave = false;
+    std::string pathToSave;
+
+    for(int i = 1; i < argc; ++i) {
+        if(strcmp(argv[i], "-t") == 0) {
+            terminalPlay = true;
+        } else if(strcmp(argv[i], "-s") == 0) {
+            loadFromSave = true;
+            pathToSave = argv[++i];
+        } else if(strcmp(argv[i], "-h") == 0) {
+            if(i < argc - 1) {
+                HighScoreManager::displayHighScores(std::atoi(argv[i + 1]));
+            } else {
+                HighScoreManager::displayHighScores();
+            }
+            return 0;
+        }
+    }
+
+    Game game;
+
+    if(terminalPlay) {
+        if(loadFromSave) {
+            game = Game::loadFromFile(pathToSave);
         } else {
             game = Game(1);
         }
         game.start();
     } else {
-        startSFML();
+        sf::ContextSettings settings;
+        settings.antiAliasingLevel = 0;
+        sf::RenderWindow window(sf::VideoMode({800, 600}), "SFML Grid Game", sf::State::Windowed, settings);
+        window.setFramerateLimit(60);
+
+        if(loadFromSave) {
+            game = Game::loadFromFile(pathToSave);
+            game.startSFML(window);
+        } else {
+            startSFML(window);
+        }
     }
 
     return 0;
 }
 
-void startSFML() {
+void startSFML(sf::RenderWindow& window) {
     std::string characterName;
     CharacterClass characterClass;
     bool characterNameEntered = false, characterClassSelected = false, shiftPressed = false;
-    sf::ContextSettings settings;
-    settings.antiAliasingLevel = 0;
-    sf::RenderWindow window(sf::VideoMode({800, 600}), "SFML Grid Game", sf::State::Windowed, settings);
-    window.setFramerateLimit(60);
 
     while (window.isOpen() && (!characterNameEntered || !characterClassSelected)) {
         while (const std::optional event = window.pollEvent()) {

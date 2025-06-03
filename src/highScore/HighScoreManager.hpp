@@ -26,6 +26,13 @@ public:
      * @param player The player's character.
      */
     static void saveScore(unsigned level, const Character& player);
+
+    /**
+     * @brief Displays the current high scores.
+     * @param amount The amount of high scores to be printed in descending order. Default behaviour is top 10 scores.
+     * @note If file has less then the desired amount of high scores, then the method output until EOF.
+     */
+    static void displayHighScores(int amount = 10);
 };
 
 #endif
