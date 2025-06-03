@@ -1,6 +1,6 @@
 #include <catch2/catch_all.hpp>
-#include "../monster/Monster.hpp"
-#include "../character/Character.hpp"
+#include "../src/monster/Monster.hpp"
+#include "../src/character/Character.hpp"
 
 TEST_CASE("Monster initialization", "[Monster]") {
     double takenDamageMultForLevel10 = 15;

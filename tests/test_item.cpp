@@ -1,9 +1,9 @@
 #include <catch2/catch_all.hpp>
 #include <catch2/matchers/catch_matchers_floating_point.hpp>
-#include "../item/Item.hpp"
-#include "../item/Armor.hpp"
-#include "../item/Spell.hpp"
-#include "../item/Weapon.hpp"
+#include "../src/item/Item.hpp"
+#include "../src/item/Armor.hpp"
+#include "../src/item/Spell.hpp"
+#include "../src/item/Weapon.hpp"
 
 TEST_CASE("Item base class functionality", "[Item]") {
     Item item("Generic", 20.0);

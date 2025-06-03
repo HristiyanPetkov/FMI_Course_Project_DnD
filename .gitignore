@@ -3,3 +3,6 @@ map_assets/*
 build/*
 cmake-build-debug/*
 **/*:Zone.Identifier
+Doxyfile.bak
+html/*
+latex/*
