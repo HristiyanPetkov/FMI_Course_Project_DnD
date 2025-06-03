@@ -1,6 +1,7 @@
 #include <functional>
 #include <ctime>
 #include <stack>
+#include <random>
 #include "GameMapGenerator.hpp"
 
 GameMapGenerator::GameMapGenerator(size_t height, size_t width)
@@ -20,7 +21,9 @@ std::vector<std::vector<char>> GameMapGenerator::generateRandomMap() {
 void GameMapGenerator::dfs(int i, int j) {
     static int dir[4][2] = { {0,1}, {0,-1}, {-1,0}, {1,0} };
     int order[] = {0, 1, 2, 3};
-    std::random_shuffle(order, order + 4);
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::shuffle(order, order + 4, gen);
 
     if (i < 1 || j < 1 || i > height - 2 || j > width - 2) return;
     if (maze[i][j] == ' ') return;
