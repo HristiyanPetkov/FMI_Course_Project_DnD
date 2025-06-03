@@ -19,7 +19,7 @@ std::istream& operator>>(std::istream& is, InputCommand& inputCommand) {
     } else if(input == "exit") {
         inputCommand = InputCommand::EXIT;
     } else {
-        throw std::invalid_argument("Invalid command");
+        inputCommand = InputCommand::NONE;
     }
 
     return is;

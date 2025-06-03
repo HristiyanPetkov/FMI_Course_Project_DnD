@@ -1,7 +1,5 @@
 #include "EmptyTile.hpp"
 
-void EmptyTile::apply(Character &character) {}
-
 char EmptyTile::getDisplayCharacter() const {
     return '.';
 }
@@ -12,4 +10,8 @@ Tile *EmptyTile::clone() const {
 
 bool EmptyTile::isEmpty() {
     return true;
+}
+
+sf::Color EmptyTile::getColor() {
+    return sf::Color::Black;
 }

@@ -1,5 +1,6 @@
 #include <fstream>
 #include <random>
+#include <SFML/Graphics.hpp>
 
 #include "GameMap.hpp"
 #include "tile/WallTile.hpp"
@@ -240,4 +241,50 @@ void GameMap::deserialize(std::istream &is) {
     swap(newMap);
 }
 
-//width(10), height(10), numberOfMonsters(2), numberOfTreasures(2), map(), characterX(1), characterY(1)
+void GameMap::renderSFML(sf::RenderWindow& window) {
+    float tileSizeX = (static_cast<float>(window.getView().getSize().x) / static_cast<float>(width));
+    float tileSizeY = static_cast<float>(window.getView().getSize().y) / static_cast<float>(height);
+
+    for (size_t y = 0; y < height; ++y) {
+        for (size_t x = 0; x < width; ++x) {
+            float px = x * tileSizeX;
+            float py = y * tileSizeY;
+            map[y][x]->renderSFML(window, px, py, tileSizeX, tileSizeY);
+        }
+    }
+}
+
+void GameMap::move(Character &character, Direction direction, sf::RenderWindow &window) {
+    if(canMove(direction)) {
+        movePlayer(character, direction, window);
+    }
+}
+
+void GameMap::movePlayer(Character &character, Direction direction, sf::RenderWindow &window) {
+    switch(direction) {
+        case Direction::UP:
+            map[characterY - 1][characterX]->apply(character, window);
+            map[characterY - 1][characterX] = map[characterY - 1][characterX]->changeOnExpended();
+            std::swap(map[characterY - 1][characterX], map[characterY][characterX]);
+            --characterY;
+            break;
+        case Direction::RIGHT:
+            map[characterY][characterX + 1]->apply(character, window);
+            map[characterY][characterX + 1] = map[characterY][characterX + 1]->changeOnExpended();
+            std::swap(map[characterY][characterX + 1], map[characterY][characterX]);
+            ++characterX;
+            break;
+        case Direction::DOWN:
+            map[characterY + 1][characterX]->apply(character, window);
+            map[characterY + 1][characterX] = map[characterY + 1][characterX]->changeOnExpended();
+            std::swap(map[characterY + 1][characterX], map[characterY][characterX]);
+            ++characterY;
+            break;
+        case Direction::LEFT:
+            map[characterY][characterX - 1]->apply(character, window);
+            map[characterY][characterX - 1] = map[characterY][characterX - 1]->changeOnExpended();
+            std::swap(map[characterY][characterX - 1], map[characterY][characterX]);
+            --characterX;
+            break;
+    }
+}

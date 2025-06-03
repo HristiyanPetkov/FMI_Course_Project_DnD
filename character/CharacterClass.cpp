@@ -16,7 +16,6 @@ std::ostream& operator<<(std::ostream& os, const CharacterClass& characterClass)
 std::istream& operator>>(std::istream& is, CharacterClass& characterClass) {
     std::string choice;
     is >> choice;
-    std::cout << choice;
     if(choice == "Human") {
         characterClass = CharacterClass::Human;
     } else if(choice == "Mage") {

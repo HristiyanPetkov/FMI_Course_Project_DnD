@@ -9,6 +9,7 @@
 class BattleSystem {
 public:
     static bool battle(Character& character, Monster& monster);
+    static bool battle(Character& character, Monster& monster, sf::RenderWindow& window);
 };
 
 

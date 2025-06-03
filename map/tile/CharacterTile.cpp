@@ -11,3 +11,7 @@ char CharacterTile::getDisplayCharacter() const {
 Tile *CharacterTile::clone() const {
     return new CharacterTile(*this);
 }
+
+sf::Color CharacterTile::getColor() {
+    return sf::Color::Green;
+}

@@ -2,12 +2,13 @@
 #define FMI_COURSE_PROJECT_DND_CHARACTER_HPP
 
 
+#include <iostream>
 #include <cstddef>
+#include <SFML/Graphics.hpp>
 #include "CharacterClass.hpp"
 #include "../item/Item.hpp"
 #include "../item/Weapon.hpp"
 #include "../item/ItemType.hpp"
-#include <iostream>
 
 class Monster;
 
@@ -37,6 +38,11 @@ public:
 
     bool operator>(const Character& other) const;
     bool operator<(const Character& other) const;
+
+    void printSFML(sf::RenderWindow &window);
+
+    void levelUpSFML(sf::RenderWindow &window);
+
 private:
     std::string name;
     CharacterClass characterClass;

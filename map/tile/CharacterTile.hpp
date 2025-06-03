@@ -9,6 +9,9 @@ public:
     char getDisplayCharacter() const override;
     Tile *clone() const override;
     ~CharacterTile() override = default;
+
+protected:
+    sf::Color getColor() override;
 };
 
 

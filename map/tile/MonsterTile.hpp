@@ -14,6 +14,11 @@ public:
     void serialize(std::ostream &os) const override;
     Tile *clone() const override;
     ~MonsterTile() override = default;
+
+    virtual void apply(Character& character, sf::RenderWindow& window);
+protected:
+    sf::Color getColor() override;
+
 private:
     Monster monster;
 };

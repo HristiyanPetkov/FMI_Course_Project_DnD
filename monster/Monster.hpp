@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <cstddef>
+#include "SFML/Graphics/RenderWindow.hpp"
 
 class Character;
 
@@ -20,6 +21,9 @@ public:
     static double getStartingTakenDamageMult(unsigned level);
     void serialize(std::ostream &os) const;
     void deserialize(std::istream &is);
+
+    void printSFML(sf::RenderWindow &window);
+
 private:
     std::string name;
     size_t strength, mana, maxHealth;

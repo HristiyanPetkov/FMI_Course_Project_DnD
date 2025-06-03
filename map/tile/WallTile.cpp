@@ -1,7 +1,5 @@
 #include "WallTile.hpp"
 
-void WallTile::apply(Character &character) {}
-
 char WallTile::getDisplayCharacter() const {
     return '#';
 }
@@ -12,4 +10,8 @@ Tile *WallTile::clone() const {
 
 Tile *WallTile::changeOnExpended() {
     return this;
+}
+
+sf::Color WallTile::getColor() {
+    return sf::Color::White;
 }

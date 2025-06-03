@@ -58,3 +58,17 @@ void Monster::serialize(std::ostream &os) const {
 void Monster::deserialize(std::istream &is) {
     is >> std::quoted(name) >> strength >> mana >> maxHealth >> currentHealth >> takenDamageMult;
 }
+
+void Monster::printSFML(sf::RenderWindow &window) {
+    sf::Font font("resources/text_fonts/montserrat/Montserrat-Black.otf");
+    sf::Text text(font);
+
+    text.setCharacterSize(60);
+    text.setFillColor(sf::Color::White);
+    text.setPosition(sf::Vector2f{window.getView().getSize() / 8.f });
+    std::stringstream ss;
+    ss << name << " " << currentHealth << "/"<< maxHealth << std::endl;
+    text.setString(ss.str());
+
+    window.draw(text);
+}

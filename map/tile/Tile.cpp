@@ -5,6 +5,8 @@
 #include "MonsterTile.hpp"
 #include "TreasureTile.hpp"
 
+void Tile::apply(Character &character) {}
+
 bool Tile::isEmpty() {
     return false;
 }
@@ -44,3 +46,15 @@ Tile* Tile::deserialize(std::istream &is) {
             throw std::invalid_argument("Unsupported tile type");
     }
 }
+
+void Tile::renderSFML(sf::RenderWindow &window, float x, float y, float tileSizeX, float tileSizeY) {
+    sf::RectangleShape shape(sf::Vector2f(tileSizeX, tileSizeY));
+    shape.setPosition({x, y});
+    shape.setFillColor(getColor());
+    shape.setOutlineThickness(1.f);
+    shape.setOutlineColor(sf::Color::Black);
+
+    window.draw(shape);
+}
+
+void Tile::apply(Character &character, sf::RenderWindow &window) {}

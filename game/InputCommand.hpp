@@ -3,7 +3,7 @@
 
 #include <iostream>
 
-enum class InputCommand { MOVE_UP, MOVE_LEFT, MOVE_DOWN, MOVE_RIGHT, PRINT_CHARACTER, EXIT };
+enum class InputCommand { MOVE_UP, MOVE_LEFT, MOVE_DOWN, MOVE_RIGHT, PRINT_CHARACTER, EXIT, NONE};
 std::istream& operator>>(std::istream& is, InputCommand& inputCommand);
 
 

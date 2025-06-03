@@ -26,6 +26,9 @@ public:
     bool onNextLevelField() const;
     void serialize(std::ostream &os) const;
     void deserialize(std::istream &is);
+
+    void renderSFML(sf::RenderWindow& window);
+    void move(Character& character, Direction direction, sf::RenderWindow& window);
 private:
     size_t width, height, numberOfMonsters, numberOfTreasures;
     std::vector<std::vector<Tile*>> map;
@@ -40,6 +43,8 @@ private:
 
     bool canMove(Direction direction);
     void movePlayer(Character& character, Direction direction);
+
+    void movePlayer(Character& character, Direction direction, sf::RenderWindow& window);
 };
 
 #endif

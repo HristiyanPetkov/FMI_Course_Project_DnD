@@ -19,6 +19,11 @@ public:
     void serialize(std::ostream &os) const override;
     Tile *clone() const override;
     ~TreasureTile() override;
+
+    void apply(Character &character, sf::RenderWindow& window) override;
+protected:
+    sf::Color getColor() override;
+
 private:
     Item* item;
     ItemType type;

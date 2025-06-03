@@ -29,3 +29,11 @@ void MonsterTile::serialize(std::ostream &os) const {
     os << getDisplayCharacter() << " ";
     monster.serialize(os);
 }
+
+sf::Color MonsterTile::getColor() {
+    return sf::Color::Red;
+}
+
+void MonsterTile::apply(Character &character, sf::RenderWindow &window) {
+    BattleSystem::battle(character, monster, window);
+}
