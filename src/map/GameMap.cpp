@@ -1,8 +1,10 @@
 #include <fstream>
 #include <random>
+#include <functional>
 #include "SFML/Graphics.hpp"
 
 #include "GameMap.hpp"
+#include "GameMapGenerator.hpp"
 #include "tile/WallTile.hpp"
 #include "tile/EmptyTile.hpp"
 #include "tile/CharacterTile.hpp"
@@ -55,12 +57,14 @@ void GameMap::calculateLevelParameters(unsigned int level) {
 }
 
 void GameMap::fillMapWithEmptyAndWalls() {
+    std::vector<std::vector<char>> maze = GameMapGenerator(height, width).generateRandomMap();
     for (size_t i = 0; i < height; ++i) {
         for (size_t j = 0; j < width; ++j) {
-            if (i == 0 || i == height - 1 || j == 0 || j == width - 1) {
-                map[i][j] = new WallTile();
-            } else {
+            if (map[i][j]) delete map[i][j];
+            if (maze[i][j] == ' ') {
                 map[i][j] = new EmptyTile();
+            } else {
+                map[i][j] = new WallTile();
             }
         }
     }

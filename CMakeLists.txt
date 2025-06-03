@@ -9,7 +9,9 @@ add_custom_target(copy_assets
         COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_CURRENT_LIST_DIR}/resources ${CMAKE_CURRENT_BINARY_DIR}/resources
 )
 
-add_library(DnD STATIC)
+add_library(DnD STATIC
+        src/map/GameMapGenerator.cpp
+        src/map/GameMapGenerator.hpp)
 target_sources(
         DnD
         PRIVATE

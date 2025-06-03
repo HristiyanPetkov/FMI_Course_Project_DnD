@@ -261,7 +261,7 @@ void Character::printSFML(sf::RenderWindow& window) {
 }
 
 void Character::levelUpSFML(sf::RenderWindow &window) {
-    int attrPoints = 30, inputPoints;
+    int attrPoints = 30, inputPoints = 0;
     bool attrPicked = false, inputPointsPicked = false;
     std::string stat, errorMessage;
     sf::View fullScreen(sf::FloatRect({0.f, 0.f}, {1.f, 1.f}));
@@ -348,11 +348,11 @@ void Character::levelUpSFML(sf::RenderWindow &window) {
 
         window.clear(sf::Color::Black);
 
-
+        std::string pointsLeftMessage = "You have " + std::to_string(attrPoints) + " points left\n";
         if(!attrPicked) {
-            text.setString("Z. Strength, X. Mana, C. Hp");
+            text.setString(pointsLeftMessage + "Z. Strength, X. Mana, C. Hp");
         } else {
-            text.setString("Increase stats by: \n" + std::to_string(inputPoints) + '\n' + errorMessage);
+            text.setString(pointsLeftMessage + "Increase stats by: \n" + std::to_string(inputPoints) + '\n' + errorMessage);
         }
         text.setPosition(sf::Vector2f{ window.getView().getSize() / 8.f });
         window.draw(text);
